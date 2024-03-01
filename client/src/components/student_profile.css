@@ -1,0 +1,141 @@
+/* student.css */
+.StudentBox {
+    width: 600px;
+    margin: 0 auto; /* Adjust margin to add space only on the sides */
+    padding: 20px;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .Student {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+  }
+  
+  .student-registration-form {
+    width: 100%;
+  }
+  
+  h2 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 30px;
+  }
+  
+  section {
+    margin-bottom: 20px;
+  }
+  
+  h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="file"],
+  select {
+    width: calc(100% - 10px);
+    padding: 8px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+  }
+  
+  .birth-date select {
+    width: calc(33.33% - 10px);
+  }
+  
+  .name-container input {
+    width: calc(33.33% - 10px);
+  }
+  
+  .city-state-container input {
+    width: calc(50% - 1px);
+  }
+  
+  .student-registration-form button {
+    background-color: #007BFF;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  span {
+    color: red;
+  }
+  
+  @media (max-width: 768px) {
+    .StudentBox {
+      padding: 10px;
+    }
+  
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="file"],
+    select,
+    textarea {
+      width: calc(100% - 8px);
+    }
+  
+    .birth-date{
+        display: flex;
+        align-items: left;
+        margin-bottom: 8px;
+    }
+
+    .birth-date input {
+        width: calc(33.33% - 8px);
+    }
+  
+    .name-container input {
+      width: calc(33.33% - 8px);
+    }
+  
+    .city-state-container input {
+      width: calc(50% - 50px);
+    }
+  
+    button {
+      width: 100%;
+    }
+  }
+  .photo-container1 {
+    width: 130px; /* Adjust size as needed */
+    height: 130px; /* Adjust size as needed */
+    overflow: hidden;
+    border-radius: 50%;
+    margin-left: 230px;
+  }
+  
+  .placeholder1 {
+    width: 100%; /* Fill the container */
+    height: 100%; /* Fill the container */ 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px; /* Adjust font size for icon */
+    margin-bottom: 10px;
+  }
+
+  .email{
+   margin-left: -560px;
+  }
+
+  .email input{
+    width: 575px;
+  }

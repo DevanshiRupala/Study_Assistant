@@ -1,0 +1,37 @@
+/* styles.css */
+.search-page {
+  width: 300px;
+  margin: 0 auto;
+  margin-left: 600px;
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+
+.search-page h2 {
+  text-align: center;
+}
+
+.search-page label {
+  margin-bottom: 5px;
+}
+
+.search-page input[type="text"],
+.search-page select {
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.search-page button {
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.search-page button:hover {
+  background-color: #0056b3;
+}

@@ -1,0 +1,10 @@
+.signup_form {
+    width: 500px;
+    height: 500px;
+    margin-left:300px;
+    margin-top: 100px;
+}
+
+.signup_form input {
+    width: 50%;
+}
