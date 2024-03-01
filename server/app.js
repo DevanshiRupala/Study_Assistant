@@ -222,18 +222,18 @@ app.get('/getpdf', async (req, res) => {
 });
 
 const studentPreferences = {
-  'Name': 'Student',
-  'Subject': 'Physics',
-  'Learning_Mode': 'In-person',
-  'Grade_Level': 'High School'
+  "Subjects": ["Physics", "Chemistry"],
+  "Learning_Mode": ["In-person", "Online"],
+  "Grade_Level": ["High School", "Middle School"]
 };
 
+
 const tutorsData = [
-  { 'Name': 'Tutor1', 'Subject': 'Math', 'Learning_Mode': 'Online', 'Grade_Level': 'High School' },
-  { 'Name': 'Tutor2', 'Subject': 'Science', 'Learning_Mode': 'In-person', 'Grade_Level': 'Middle School' },
-  { 'Name': 'Tutor3', 'Subject': 'English', 'Learning_Mode': 'Online', 'Grade_Level': 'Elementary' },
-  { 'Name': 'Tutor4', 'Subject': 'Math', 'Learning_Mode': 'In-person', 'Grade_Level': 'High School' },
-  { 'Name': 'Tutor5', 'Subject': 'Physics', 'Learning_Mode': 'Online', 'Grade_Level': 'High School' }
+  {"Name": "Tutor1", "Subject": ["Physics", "Math"], "Learning_Mode": ["In-person", "Online"], "Grade_Level": ["High School", "Middle School"]},
+  {"Name": "Tutor2", "Subject": ["Math", "Chemistry"], "Learning_Mode": ["Online"], "Grade_Level": ["High School"]},
+  {"Name": "Tutor3", "Subject": ["Physics", "Chemistry"], "Learning_Mode": ["Online"], "Grade_Level": ["Middle School"]},
+  {"Name": "Tutor4", "Subject": ["Biology", "Chemistry"], "Learning_Mode": ["In-person"], "Grade_Level": ["High School"]},
+  {"Name": "Tutor5", "Subject": ["Math", "Physics"], "Learning_Mode": ["In-person"], "Grade_Level": ["Middle School", "High School"]}
 ];
 
 // Call the Python script with student preferences as a command-line argument
