@@ -1,35 +1,51 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const UploadPDF = () => {
-    const [file, setFile] = useState(null);
+const FileUploadForm = () => {
+  const [file, setFile] = useState(null);
 
-    const handleFileChange = (event) => {
-        const selectedFile = event.target.files[0];
-        setFile(selectedFile);
-    };
+  // Function to handle file selection
+  const handleFileChange = (event) => {
+    setFile(event.target.files[0]);
+  };
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        const formData = new FormData();
-        formData.append('file', file);
+  // Function to handle form submission
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
-        try {
-            const res = await axios.post("http://127.0.0.1:8000/uploadfile", formData);
-            // alert("PDF file uploaded successfully!");
-        } catch (error) {
-            console.error("Error uploading PDF file:", error);
-            //alert("An error occurred while uploading the PDF file.");
+    const formData = new FormData();
+    formData.append('file', file);
+    //formData.append('tutorid', tutorId); // Attach the tutor ID to the form data
+
+    try {
+      const response = await axios.post('http://localhost:8000/upload', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
         }
-    };
+      });
 
-    return (
-        <>
-            <h2>Upload PDF</h2>
-            <input type="file" onChange={handleFileChange} />
-            <button onClick={handleSubmit}>Upload File</button>
-        </>
-    );
+      if (response.status === 200) {
+        console.log('File uploaded successfully');
+        // Optionally, handle successful upload
+      } else {
+        console.error('Upload failed');
+        // Optionally, handle upload failure
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      // Handle any errors that occur during the upload process
+    }
+  };
+
+  return (
+    <div>
+      <h2>Upload a PDF File</h2>
+      <form onSubmit={handleSubmit} encType="multipart/form-data">
+        <input type="file" name="file" onChange={handleFileChange} />
+        <button type="submit">Upload</button>
+      </form>
+    </div>
+  );
 };
 
-export default UploadPDF;
+export default FileUploadForm;

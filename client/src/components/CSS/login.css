@@ -1,108 +1,174 @@
-.log-reg-body {
-    padding: 1.5em 2.5em 2em 2em;
-  }
-  
-  .main-container {
-    padding-top: 10%;
-  }
-  
-  .blackboard {
-    display: flex;
-    width: 500px;
-    height: 500px;
-    margin-left: 20%;
-  }
-  
-  #loginCard,
-  #signupCard {
-    width: 500px;
-    height: 600px;
-    box-shadow: 5px 5px 5px rgb(1, 148, 184, 0.5);
-  }
-  
-  .card-title {
-    padding: 0.5em 0.5em 0em 0.5em;
-  }
-  
-  .alternate-text {
-    padding-top: 2.5em;
-    text-align: right;
-    padding-right: 2em;
-    font-size: 15px;
-  }
-  
-  #reg-link,
-  #sign-in {
-    color: rgb(237, 213, 0);
-    align-items: right;
-  }
-  
-  #acc-holder {
-    color: rgb(189, 187, 187);
-  }
-  
-  #signIn,
-  #signUp {
-    font-size: 50px;
-    font-weight: 300;
-  }
-  
-  .quote {
-    font-weight: 500;
-    text-align: center;
-    font-size: 25px;
-    padding-top: 5%;
-    align-items: left;
-    justify-content: left;
-    margin-left: 10%;
-  }
-  
-  .btn {
-    font-weight: 500;
-    align-items: center;
-    margin: 10px;
-    padding: 10px 30px;
-    text-align: center;
-    text-transform: uppercase;
-    transition: 0.5s;
-    background-size: 200% auto;
-    color: white;
-  
-    border: 0px;
-    box-shadow: 5px 5px 14px -7px rgb(237, 213, 0);
-    background-color: rgb(237, 213, 0);
-    cursor: pointer;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-  }
-  
-  .btn:hover {
-    background-position: right center;
-    color: #fff;
-    text-decoration: none;
-  }
-  
-  .btn:active {
-    transform: scale(0.95);
-  }
-  
-  .err {
-    color: #ff512f;
-    font-size: small;
-  }
+.login_card1 {
+  width: 500px;
+  height: 600px;
+  box-shadow: 0px 0px 20px rgb(0, 167, 251, 0.5); /* Adding shadow around the entire card */
+  border: 2px solid transparent; /* Transparent border */
+  margin-left: 800px; /* Adjust margin to move the card to the left */
+  margin-top: -640px;
+}
 
-  .card {
-    margin-left: 500px;
-    margin-top: 45px;
-  }
+.login_log-reg-body {
+  padding: 1.5em 2.5em 2em 2em;
+}
 
-  .radio_button {
-    display: flex;
-    align-items: left;
-    margin-bottom: 8px;
-  }
+.login_main-container {
+  padding-top: 10%;
+}
+
+.login_blackboard {
+  display: flex;
+  width: 500px;
+  height: 500px;
+  margin-left: 20%;
+}
+
+.login_card-title {
+  padding: 0.5em 0.5em 0em 0.5em;
+  text-align: center;
+  margin-top: -5px;
+}
+
+.login_form-body{
+  margin-top: -10px;
+}
+
+.login_form-label{
+  margin-bottom: 15px;
+  margin-top: 10px;
+}
+
+.login_form-control{
+  border-radius: 5px;
+  box-shadow: 0px 0px 20px rgb(0, 167, 251, 0.4);
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  width: 419px;
+  height: 40px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.login_alternate-text {
+  padding-top: 2.5em;
+  text-align: right;
+  padding-right: 2em;
+  font-size: 15px;
+}
+
+.login_reg-link,
+.login_sign-in {
+  color: rgb(0, 167, 251);
+  align-items: right;
+}
+
+.login_acc-holder {
+  color: rgb(189, 187, 187);
+}
+
+.login_signIn,
+.login_signUp {
+  font-size: 50px;
+  font-weight: 300;
+}
+
+.login_quote {
+  font-weight: 500;
+  text-align: center;
+  font-size: 25px;
+  padding-top: 5%;
+  align-items: left;
+  justify-content: left;
+  margin-left: 10%;
+}
+
+.login_btn {
+  font-weight: 500;
+  align-items: center;
+  margin: 10px;
+  padding: 10px 30px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  margin-top: 30px;
+  border-radius: 5px;
+  margin-left: 150px;
+  box-shadow: 5px 5px 14px -7px rgb(0, 167, 251);
+  background-color: rgb(0, 167, 251);
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.login_btn1 {
+  font-weight: 500;
+  align-items: center;
+  margin: 10px;
+  padding: 10px 30px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  margin-top: 10px;
+  border-radius: 5px;
+  margin-left: 70px;
+  box-shadow: 5px 5px 14px -7px rgb(0, 167, 251);
+  background-color: rgb(0, 167, 251);
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 300px;
+}
+
+.login_or{
+  margin-left: 210px;
+  margin-top: 10px;
+  font-size: 17px;
+}
+
+.login_side_image1{
+  margin-top: 40px;
   
-  .radio_button input[type='radio']{
-    margin-left: -110px;
-  }
+}
+
+.login_side_image1 img{
+  width: 650px;
+  height: 670px;
+  margin-left: 40px;
+}
+
+.login_btn:hover {
+  background-position: right center;
+  color: #fff;
+  text-decoration: none;
+  background-color: rgb(224, 109, 27);
+}
+
+.login_btn1:hover {
+  background-position: right center;
+  color: #fff;
+  text-decoration: none;
+  background-color: rgb(224, 109, 27);
+}
+
+.login_btn:active {
+  transform: scale(0.95);
+}
+
+.login_err {
+  color: #ff512f;
+  font-size: small;
+}
+
+.login_radio_button {
+  display: flex;
+  align-items: left;
+  margin-bottom: 8px;
+}
+
+.login_radio_button input[type='radio']{
+  margin-left: -110px;
+}

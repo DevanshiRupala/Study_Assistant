@@ -5,12 +5,12 @@ const mongoose = require('mongoose');
 const userdb = require('./models/userSchema');
 const tutor = require('./models/tutorSchema');
 const Student = require('./models/studentSchema');
+const sessions = require('./models/sessionSchema');
 const File = require('./models/fileSchema');
 const path = require('path');
-const multer = require('multer');
 const Grid = require('gridfs-stream');
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
+const { GridFsStorage } = require('multer-gridfs-storage');
+const multer = require('multer');
 const { indexUser, searchUser } = require('./solrUtils');
 const session = require('express-session');
 const passport = require('passport');
@@ -23,14 +23,32 @@ const clientid = "246227139666-eqad5p4ctdgns5gsiv95po9n4daro08c.apps.googleuserc
 const clientsecret = "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";
 
 mongoose.connect("mongodb://127.0.0.1:27017/study_assistant").then((res) => console.log("Connected"));
-const conn = mongoose.connection;
-let gfs;
 
+let gfs;
+const conn = mongoose.connection;
 conn.once('open', () => {
     gfs = Grid(conn.db, mongoose.mongo);
     gfs.collection('uploads');
 });
 
+// Create storage engine using GridFS
+const storage = new GridFsStorage({
+    url: 'mongodb://127.0.0.1:27017/study_assistant',
+    file: (req, file) => {
+        return {
+            filename: file.originalname,
+            bucketName: 'uploads',
+            metadata: {
+              tutorId: '65df6117d1b848aa46a4d327' // Store tutor ID with the file metadata
+            }
+        };
+    }
+});
+const upload = multer({
+  limits: {
+    fieldSize: 1024 * 1024 * 10, // Increase to 10 MB or adjust as needed
+  },
+});
 
 const PORT = 8000;
 app.listen(PORT, () => {
@@ -106,32 +124,24 @@ app.get('/',(req,res)=>{
   res.status(200).json("server start");
 });
 
-app.post("/signup_user", async (req, res) => {
-  try {
-    const hash = bcrypt.hashSync(req.body.pass, saltRounds);
-    const user = await userdb.create({ username: req.body.username, email: req.body.email, password: hash, isStudent: req.body.isStudent });
-
-    res.json(user);
-  } catch (error) {
-    if (error.code === 11000) {
-      res.status(400).json({ error: "Email already exists." });
-    } else {
-      console.error('Error creating user:', error);
-      res.status(500).json({ error: "Internal server error" });
-    }
-  }
-});
-
 app.post("/login_user", async (req, res) => {
   try {
     const user = await userdb.findOne({ email: req.body.email });
     console.log(user)
     if (user) {
-      bcrypt.compare(req.body.pass, user.password, (err, result) => {
+      bcrypt.compare(req.body.pass, user.password, async (err, result) => {
         if (err) {
           res.status(500).json("Re-enter the credentials");
         } else if (result) {
-          res.status(200).json(user);
+          if(!user.isStudent){
+            const t = await tutor.findOne({tutor_id : user._id});
+            res.status(200).json(t);
+          }
+          else{
+            const s = await Student.findOne({student_id : user._id});
+            console.log(s)
+            res.status(201).json(s);
+          } 
         } else {
           res.status(401).json("Invalid credentials");
         }
@@ -154,92 +164,87 @@ app.post("/searchuser", async (req,res) => {
 
 app.post("/submitTutorProfile", upload.single('photo'), async (req,res) => {
   const { firstName, lastName, city, state, zipCode, email, gender, introduction, qualifications, 
-    institutions, gradeLevels, hourlyRates, socialProfiles, subjects, languages } = req.query;
+    institutions, gradeLevels, hourlyRates, socialProfiles, subjects, languages, facebookProfile, twitterProfile, instagramProfile,
+    s_username, s_email, s_pass, isStudent} = req.query;
+    const hash = bcrypt.hashSync(s_pass, saltRounds);
+    const user = await userdb.create({ username: s_username, email: s_email, password: hash, isStudent: isStudent});
     const fullName = firstName.trim()+lastName.trim();
-    const tutor_id = '65c76c0b73e09bcbeb40bf84';
+    const tutor_id = user._id;
+    const profile_picture = req.body.photo;
     const t = new tutor({
-      tutor_id,fullName, city, state, zipCode, email, gender, introduction, qualifications, 
-    institutions, gradeLevels, hourlyRates, socialProfiles, subjects, languages
+      tutor_id,fullName, city, state, zipCode, email, gender, introduction, qualifications, profile_picture,
+    institutions, gradeLevels, hourlyRates, socialProfiles, subjects, languages, facebookProfile, twitterProfile, instagramProfile
     });
     console.log(t);
-    indexUser(t);
-    //await t.save();
-    //const re = await userdb.updateOne({email:"j52323030@gmail.com"}, { $set: { profile_picture: req.body.photo } });
-    //console.log(re)
+    //indexUser(t);
+    await t.save();
 })
 
 app.post("/submitStudentProfile", upload.single('photo'), async (req,res) => {
-  const { firstName, lastName, city, state, zipCode, email, school, grade, birthday} = req.query;
+  const { firstName, lastName, city, state, zipCode, email, school, grade, birthday, s_email, s_pass, s_username, isStudent} = req.query;
+  console.log(req.query);
     const fullName = firstName.trim()+lastName.trim();
-    const student_id = '65c75b9f1b025d12e62f899f';
+    const hash = bcrypt.hashSync(s_pass, saltRounds);
+    const user = await userdb.create({username:s_username, email:s_email, password:hash, isStudent:isStudent})
+    const student_id = user._id;
+    const profile_picture =  req.body.photo;
     const t = new Student({
-      student_id, fullName, city, state, zipCode, email, school, grade, birthday
+      student_id, fullName, city, state, zipCode, email, school, grade, birthday, profile_picture
     });
     console.log(t);
-    indexUser(t);
+    //indexUser(t);
     await t.save();
-    //const re = await userdb.updateOne({email:"j52323030@gmail.com"}, { $set: { profile_picture: req.body.photo } });
-    //console.log(re)
 })
 
-app.post("/uploadfile", upload.single('file'), async (req, res) => {
-  try {
-    const originalFilename = req.file.originalname;
-    const buffer = req.file.buffer;
+// const studentPreferences = {
+//   "Subjects": ["Physics", "Chemistry"],
+//   "Learning_Mode": ["In-person", "Online"],
+//   "Grade_Level": ["High School", "Middle School"]
+// };
 
-    const writestream = gfs.createWriteStream({
-        filename: originalFilename
-    });
 
-    writestream.write(buffer);
-    writestream.end();
-    const metadata = new File({
-      filename: originalFilename,
-  });
-  await metadata.save();
-    res.send('File uploaded successfully');
+// const tutorsData = [
+//   {"Name": "Tutor1", "Subject": ["Physics", "Math"], "Learning_Mode": ["In-person", "Online"], "Grade_Level": ["High School", "Middle School"]},
+//   {"Name": "Tutor2", "Subject": ["Math", "Chemistry"], "Learning_Mode": ["Online"], "Grade_Level": ["High School"]},
+//   {"Name": "Tutor3", "Subject": ["Physics", "Chemistry"], "Learning_Mode": ["Online"], "Grade_Level": ["Middle School"]},
+//   {"Name": "Tutor4", "Subject": ["Biology", "Chemistry"], "Learning_Mode": ["In-person"], "Grade_Level": ["High School"]},
+//   {"Name": "Tutor5", "Subject": ["Math", "Physics"], "Learning_Mode": ["In-person"], "Grade_Level": ["Middle School", "High School"]}
+// ];
 
-} catch (err) {
-    console.error(err);
-    res.status(500).send('Internal Server Error');
-}
+// // Call the Python script with student preferences as a command-line argument
+// const pythonProcess = spawn('python', ['./pythonModel.py', JSON.stringify(studentPreferences),JSON.stringify(tutorsData)]);
+
+// // Handle data from Python script
+// pythonProcess.stdout.on('data', (data) => {
+//   console.log(data.toString());
+// });
+
+app.post("/addsession", async (req,res) => {
+  console.log(req.body)
+  tutor_id = '65df6117d1b848aa46a4d327';
+  const { date,start_time,end_time,mode,location,online_meeting_link,status,grade,topic, subject} = req.body;
+  const s = new sessions({
+    tutor_id,date,start_time,end_time,mode,location,online_meeting_link,status,grade,topic,subject
+  })
+  await s.save();
 });
 
-app.get('/getpdf', async (req, res) => {
-  try {
-      const file = await userdb.findOne({email:"j52323030@gmail.com"});
-      console.log(file)
+app.post('/upload', upload.single('file'), (req, res) => {
+  res.json({file : req.file});
+});
 
-      // if (!file) {
-      //     return res.status(404).send('File not found.');
-      // }
-      res.contentType('application/pdf');
-      res.send(file.profile_picture);
-  } catch (error) {
-      console.error('Error fetching file:', error);
-      res.status(500).send('An error occurred while fetching the file.');
+app.get('/fetch', (req, res) => {
+  const tutorId = '65df6117d1b848aa46a4d327';
+  console.log("hii")
+  if (!gfs) {
+    return res.status(500).json({ error: 'GridFS not initialized' });
   }
-});
-
-const studentPreferences = {
-  "Subjects": ["Physics", "Chemistry"],
-  "Learning_Mode": ["In-person", "Online"],
-  "Grade_Level": ["High School", "Middle School"]
-};
-
-
-const tutorsData = [
-  {"Name": "Tutor1", "Subject": ["Physics", "Math"], "Learning_Mode": ["In-person", "Online"], "Grade_Level": ["High School", "Middle School"]},
-  {"Name": "Tutor2", "Subject": ["Math", "Chemistry"], "Learning_Mode": ["Online"], "Grade_Level": ["High School"]},
-  {"Name": "Tutor3", "Subject": ["Physics", "Chemistry"], "Learning_Mode": ["Online"], "Grade_Level": ["Middle School"]},
-  {"Name": "Tutor4", "Subject": ["Biology", "Chemistry"], "Learning_Mode": ["In-person"], "Grade_Level": ["High School"]},
-  {"Name": "Tutor5", "Subject": ["Math", "Physics"], "Learning_Mode": ["In-person"], "Grade_Level": ["Middle School", "High School"]}
-];
-
-// Call the Python script with student preferences as a command-line argument
-const pythonProcess = spawn('python', ['./pythonModel.py', JSON.stringify(studentPreferences),JSON.stringify(tutorsData)]);
-
-// Handle data from Python script
-pythonProcess.stdout.on('data', (data) => {
-  console.log(data.toString());
+  gfs.files.find().toArray((err, files) => {
+    if (err) {
+      console.error('Error fetching files:', err);
+      return res.status(500).json({ error: err.message });
+    }
+    console.log(files);
+    return res.json(files);
+  });
 });

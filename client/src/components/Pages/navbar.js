@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import './navbar.css'; 
-import logo from '../images/logo (2).png'
+import '../CSS/navbar.css'; 
+import logo from '../../images/logo (2).png'
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {

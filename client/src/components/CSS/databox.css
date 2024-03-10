@@ -1,0 +1,82 @@
+a.profile-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0 30px;
+}
+
+.profile-card {
+  flex: 1 1 30%;
+  max-width: 180px;
+  background: #fff;
+  padding: 20px 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 4px;
+  box-shadow: 0 0 2px 0 #ccc;
+  transition: .3s;
+  margin: 0 10px;
+}
+
+.profile-card:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 25px -5px #ccc;
+}
+
+.profile-icon {
+  height: 100px;
+  width: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.profile-name {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 25px 0 10px 0;
+}
+
+.profile-position {
+  font-size: 18px; /* Increase font size for profession */
+  color: #777;
+}
+
+.profile-bio {
+  font-size: 14px; /* Adjust font size for bio */
+  color: #333;
+  margin-top: 10px; /* Add margin between profession and bio */
+  text-align: center; /* Center align the bio */
+}
+
+.dashbord-button{
+  margin: 20px 0; /* Reduce margin for button */
+  padding: 10px 30px;
+  color: #999;
+  text-decoration: none;
+  border: 1px solid #999;
+  border-radius: 4px;
+}
+
+.dashbord-button:hover {
+  color: #fff;
+  background: #748dff;
+  border: 1px solid #748dff;
+}
+
+@media screen and (max-width: 1000px) {
+  .profile-name {
+      font-size: 20px; /* Adjust font size for smaller screens */
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .profile-card {
+      padding: 20px 15px;
+  }
+
+  .profile-name {
+      font-size: 18px;
+  }
+}

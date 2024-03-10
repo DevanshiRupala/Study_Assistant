@@ -1,0 +1,48 @@
+  .d-container{
+    display:flex;
+    margin-left: 1px;
+  }
+  main{
+    width: 100%;
+    padding: 20px;
+  }
+  .d-sidebar{
+    background : rgb(0, 167, 251);
+    color: black;
+    height: 100vh;
+    width: 200px;
+    transition: all 0.5s;
+    margin-left: -10px;
+  }
+  .d-top_section{
+    display: flex;
+    align-items:center;
+    padding:20px 15px;
+    margin-left: -10px;
+  }
+  .d-bars{
+    display: flex;
+    margin-left: 70px;
+    font-size: 25px;
+  }
+  .d-link{
+    display: flex;
+    color: black;
+    padding: 10px 15px;
+    gap: 15px;
+    transition: all 0.5s;
+    margin-left: 0px;
+  }
+  .d-link:hover{
+    background : rgb(0, 167, 251);
+    color: rgb(237, 213, 0);
+    transition: all 0.5s;
+  }
+  .d-active{
+    background : rgb(0, 167, 251);
+    color: rgb(237, 213, 0);
+  }
+  .d-icon, .d-link_text{
+    font-size: 20px;
+  }
+  

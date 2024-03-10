@@ -55,9 +55,18 @@ const tutorSchema = new mongoose.Schema({
         type: [String],
         required : true 
     },
-    socialProfiles: {
-        type: String,
-        required : true
+    profile_picture: {
+        type : String,
+        default : "abc"
+     },
+    facebookProfile : {
+        type: String
+    },
+    twitterProfile : {
+        type: String
+    },
+    instagramProfile : {
+        type: String
     },
     languages: {
         type: [String],

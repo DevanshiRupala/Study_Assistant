@@ -6,10 +6,15 @@ const getIndianTimestamp = () => {
 };
 
 const fileSchema = new mongoose.Schema({
-    filename : {
-       type: String,
-       required : true
+    fileid: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
     },
+    tutorid: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User', 
+        required: true
+    },    
     created_at: {
         type: String,
         default: getIndianTimestamp

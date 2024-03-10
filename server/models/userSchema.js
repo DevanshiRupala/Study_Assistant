@@ -23,10 +23,6 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         required: true
     },
-    profile_picture: {
-       type : String,
-       default : "abc"
-    },
     created_at: {
         type: String,
         default: getIndianTimestamp

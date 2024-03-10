@@ -1,0 +1,78 @@
+.ss_dashboard {
+    display: flex;
+    height: 1100px;
+  }
+  
+  .s_sidebar {
+    width: 200px;
+    /* background: linear-gradient(to right, #54514d, #464646, #474746, #50504f); */
+    background-color: rgb(0, 167, 251);
+    color: #fff;
+    padding: 20px;
+  }
+  
+  .s_sidebar ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .s_sidebar ul li {
+    margin-bottom: 10px;
+  }
+  
+  .s_sidebar ul li a {
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  .s_sidebar ul li a:hover {
+    text-decoration: underline;
+  }
+  
+  .s_dashboard{
+    margin-bottom: -6px;
+    padding-top: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-left: 0px;
+  }
+  
+  .s_person{
+    margin-bottom: -6px;
+    padding-top: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-left: 1px;
+  }
+  
+  .s_session{
+    margin-bottom: -6px;
+    padding-top: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-left: 0px;
+  }
+  
+  .s_chart{
+    margin-bottom: -6px;
+    padding-top: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-left: 1px;
+  }
+  
+  .s_subcription{
+    margin-bottom: -6px;
+    padding-top: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-left: 0px;
+  }
+  
+  .s_logout{
+    margin-bottom: -6px;
+    padding-top: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-left: 0px;
+  }

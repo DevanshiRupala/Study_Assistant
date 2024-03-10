@@ -1,141 +1,113 @@
-/* student.css */
-.StudentBox {
-    width: 600px;
-    margin: 0 auto; /* Adjust margin to add space only on the sides */
-    padding: 20px;
-    border: 1px solid #ddd;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
+.s_body{
+  background: linear-gradient(to right, #5aa0c3, #48b9db, #5ea1c8, #649ecb);
+}
+.student_profile-container {
+  width: 1000px;
+  height: 700px;
+  margin-left: 230px;
+  padding: 20px;
+  border-radius: 5px;
+  border: 2px solid #f4f1f1;
+  /* margin-top: 4px; */
+  background-color: aliceblue;
   
-  .Student {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
-  }
   
-  .student-registration-form {
-    width: 100%;
-  }
-  
-  h2 {
-    text-align: center;
-    font-size: 24px;
-    margin-bottom: 30px;
-  }
-  
-  section {
-    margin-bottom: 20px;
-  }
-  
-  h3 {
-    font-size: 20px;
-    margin-bottom: 10px;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  input[type="text"],
-  input[type="email"],
-  input[type="tel"],
-  input[type="file"],
-  select {
-    width: calc(100% - 10px);
-    padding: 8px;
-    box-sizing: border-box;
-    margin-bottom: 10px;
-  }
-  
-  .birth-date select {
-    width: calc(33.33% - 10px);
-  }
-  
-  .name-container input {
-    width: calc(33.33% - 10px);
-  }
-  
-  .city-state-container input {
-    width: calc(50% - 1px);
-  }
-  
-  .student-registration-form button {
-    background-color: #007BFF;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
-  
-  span {
-    color: red;
-  }
-  
-  @media (max-width: 768px) {
-    .StudentBox {
-      padding: 10px;
-    }
-  
-    input[type="text"],
-    input[type="email"],
-    input[type="tel"],
-    input[type="file"],
-    select,
-    textarea {
-      width: calc(100% - 8px);
-    }
-  
-    .birth-date{
-        display: flex;
-        align-items: left;
-        margin-bottom: 8px;
-    }
+}
 
-    .birth-date input {
-        width: calc(33.33% - 8px);
-    }
-  
-    .name-container input {
-      width: calc(33.33% - 8px);
-    }
-  
-    .city-state-container input {
-      width: calc(50% - 50px);
-    }
-  
-    button {
-      width: 100%;
-    }
-  }
-  .photo-container1 {
-    width: 130px; /* Adjust size as needed */
-    height: 130px; /* Adjust size as needed */
-    overflow: hidden;
-    border-radius: 50%;
-    margin-left: 230px;
-  }
-  
-  .placeholder1 {
-    width: 100%; /* Fill the container */
-    height: 100%; /* Fill the container */ 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 24px; /* Adjust font size for icon */
-    margin-bottom: 10px;
-  }
+.student_profile-form-row {
+  display: flex;
+  margin-bottom: 20px;
+  margin-left: 40px;
+  margin-top: 5px;
+}
 
-  .email{
-   margin-left: -560px;
-  }
+.student_profile-form-column {
+  flex: 1;
+   margin-right: 80px; 
+}
 
-  .email input{
-    width: 575px;
-  }
+.student_profile-circle {
+  width: 170px;
+  height: 150px;
+  border-radius: 50%;
+  background-color: white;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  color: #110404;
+  border-style: dashed;
+  border-color: #110404;
+  /* margin-left: -5px; */
+}
+
+.student_profile-circle img {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 50%;
+}
+
+.student_profile-profile-title {
+  display: flex;
+  align-items: center;
+}
+
+.student_profile-profile-title h2 {
+  margin-left: 70px;
+}
+
+.student_profile-student-registration-form {
+  flex: 1;
+  border-radius: 5px;
+}
+
+.student_profile-container label {
+  display: block;
+  margin-bottom: 15px;
+}
+
+.student_profile-container input[type="text"],
+.student_profile-container input[type="email"],
+.student_profile-container input[type="date"],
+.student_profile-container input[type="number"] {
+  width: 100%;
+  padding-top: 13px;
+ padding-bottom: 13px;
+  border-radius: 5px;
+  
+  border: 1px solid #ccc;
+}
+
+.student_profile-container button {
+  width: 880px;
+  padding: 10px;
+  background-color: rgb(0, 167, 251);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 40px;
+}
+
+.student_profile-container button:hover {
+  background-color: rgb(224, 109, 27);
+}
+
+.student_profile-name-row {
+  display: flex;
+  gap: 30px; /* Adjust the spacing between first name and last name */
+}
+.student_profile-name-row #firstName,#lastName{
+  width: 330px;
+  padding-top: 13px;
+  padding-bottom: 13px;
+}
+.student_profile-profile-title {
+  display: flex;
+  align-items: center;
+  margin-left: 200px; /* Adjust the margin to create space between circle and title */
+}
+
+.student_profile-address-row {
+  display: flex;
+  gap: 20px; /* Adjust the spacing between city and state */
+}

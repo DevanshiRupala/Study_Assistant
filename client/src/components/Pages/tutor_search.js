@@ -1,5 +1,5 @@
 import React from 'react';
-import './tutor_search.css'; // Import your custom CSS file
+import '../CSS/tutor_search.css'; // Import your custom CSS file
 
 const Tutor = () => {
   // Placeholder data

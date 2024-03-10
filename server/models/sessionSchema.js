@@ -11,24 +11,34 @@ const sessionSchema = new mongoose.Schema({
         ref: 'Tutor', // Assuming there's a 'Tutor' model
         required: true
     },
-    student_id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Student', // Assuming there's a 'Student' model
-        required: true
-    },
     date: {
         type: Date,
         required: true
     },
+    subject: {
+       type: String,
+       required: true
+    },
+    grade: {
+        type: String,
+        required: true
+     },
+    topic: {
+        type: String,
+        required: true
+     },
     start_time: {
-        type: Date,
+        type: String,
         required: true
     },
     end_time: {
-        type: Date,
+        type: String,
         required: true
     },
     location: {
+        type: String,
+    },
+    mode: {
         type: String,
         required: true
     },

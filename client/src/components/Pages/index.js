@@ -1,9 +1,9 @@
 import React from 'react';
-import './index.css'; 
-import Image from '../images/yellow.png'
-import Navbar from '../components/navbar'
-import Bg from '../images/index.webp'
-import Blue from '../images/blue.png'
+import '../CSS/index.css'; 
+import Image from '../../images/yellow.png'
+import Navbar from './navbar'
+import Bg from '../../images/index.webp'
+import Blue from '../../images/blue.png'
 
 const Index = () => {
 

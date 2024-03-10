@@ -15,6 +15,10 @@ const studentSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    profile_picture: {
+        type : String,
+        default : "abc"
+    },
     birthday: {
         type: Date,
         required: true

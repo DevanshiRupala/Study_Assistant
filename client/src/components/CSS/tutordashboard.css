@@ -1,0 +1,152 @@
+.dashboard {
+    display: flex;
+    height: 100vh;
+    margin-top: -6px;
+  }
+  
+  .sidebar {
+    width: 200px;
+    background-color: rgb(134, 3, 154);
+    color: #fff;
+    padding: 20px;
+  }
+  
+  .sidebar ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .sidebar ul li {
+    margin-bottom: 10px;
+  }
+  
+  .sidebar ul li a {
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  .sidebar ul li a:hover {
+    text-decoration: underline;
+  }
+  
+  .main-content {
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+    margin-left: 40px;
+    margin-top: 20px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .box {
+    width: 250px;
+    height: 200px;
+    background: linear-gradient(to right, 
+      rgb(2, 146, 248),
+      rgb(1, 162, 249),
+      rgb(0, 167, 250),
+      rgb(27, 155, 240),
+      rgb(36, 132, 222),
+      rgb(25, 161, 245),
+      rgb(45, 126, 207),
+      rgb(33, 141, 223)
+    );
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    margin-right: 32px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .box h2 {
+    margin-top: 8px;
+    font-size: 18px;
+    color: #fcfafa;
+  }
+  
+  .lab {
+    font-size: 25px;
+    margin-top: 8px;
+    color: #f8f6f6;
+  }
+  
+  .big-box1 {
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 260px;
+    margin-left: -1190px;
+    box-sizing: border-box;
+    width: 1150px;
+    height: 400px;
+  }
+  
+  .big-box h2 {
+    margin-top: 0px;
+  }
+  
+  .icon {
+    margin-left: 100px;
+    margin-top: 20px;
+  }
+  
+  .upcoming {
+    font-size: 25px;
+    margin-left: -870px;
+    color: rgb(118, 116, 118);
+  }
+  
+  .border {
+    border: 1px solid black;
+    width: 1120px;
+    
+    border-radius: 5px;
+  }
+  
+  .border td {
+    border: 1px solid black;
+    padding: 12px;
+    text-align: center;
+    border-radius: 5px;
+    
+  }
+  
+  .border tr:not(:last-child) {
+    border-bottom: 1px solid black;
+    border-radius: 5px;
+  }
+  
+  .left {
+    text-align: start;
+  }
+  
+  .right {
+    padding-left: 10px;
+  }
+  
+  .topic {
+    padding-right: 200px;
+  }
+  
+  .border tr:nth-child(odd) {
+    background: linear-gradient(to right, #54514d, #767575, #5e5e5d, #6f6f6e);
+    color: white;
+  }
+  
+  .border tr:nth-child(even) {
+    
+      background: linear-gradient(to right, 
+        
+        rgb(15, 162, 231),
+        rgb(21, 155, 208)
+       
+      );
+      /* Additional CSS properties */
+    
+    color: white;
+  }
+  

@@ -1,10 +1,151 @@
-.signup_form {
-    width: 500px;
-    height: 500px;
-    margin-left:300px;
-    margin-top: 100px;
+.register_card {
+  width: 500px;
+  height: 600px;
+  box-shadow: 0px 0px 20px rgb(0, 167, 251, 0.5); /* Adding shadow around the entire card */
+  border: 2px solid transparent; /* Transparent border */
+  margin-left: 800px; /* Adjust margin to move the card to the left */
+  margin-top: -650px;
 }
 
-.signup_form input {
-    width: 50%;
+.register_log-reg-body {
+  padding: 1.5em 2.5em 2em 2em;
+}
+
+.register_main-container {
+  padding-top: 10%;
+}
+
+.register_blackboard {
+  display: flex;
+  width: 500px;
+  height: 500px;
+  margin-left: 20%;
+}
+
+.register_card-title {
+  padding: 0.5em 0.5em 0em 0.5em;
+  text-align: center;
+  margin-top: -5px;
+}
+
+.register_form-body{
+  margin-top: -10px;
+}
+
+.register_form-label{
+  margin-bottom: 15px;
+  margin-top: 10px;
+}
+
+.register_form-control{
+  border-radius: 5px;
+  box-shadow: 0px 0px 20px rgb(0, 167, 251, 0.4);
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  width: 419px;
+  height: 40px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.register_alternate-text {
+  padding-top: 2.5em;
+  text-align: right;
+  padding-right: 2em;
+  font-size: 15px;
+}
+
+.register_reg-link,
+.register_sign-in {
+  color: rgb(0, 167, 251);
+  align-items: right;
+}
+
+.register_acc-holder {
+  color: rgb(189, 187, 187);
+}
+
+.register_signIn,
+.register_signUp {
+  font-size: 50px;
+  font-weight: 300;
+}
+
+.register_quote {
+  font-weight: 500;
+  text-align: center;
+  font-size: 25px;
+  padding-top: 5%;
+  align-items: left;
+  justify-content: left;
+  margin-left: 10%;
+}
+
+.register_btn {
+  font-weight: 500;
+  align-items: center;
+  margin: 10px;
+  padding: 10px 30px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  margin-top: 30px;
+  border-radius: 5px;
+  margin-left: 150px;
+  box-shadow: 5px 5px 14px -7px rgb(0, 167, 251);
+  background-color: rgb(0, 167, 251);
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.register_or{
+  margin-left: 210px;
+  margin-top: 10px;
+  font-size: 17px;
+}
+
+.register_side_image{
+  margin-top: 40px;
+  
+}
+
+.register_side_image img{
+  width: 650px;
+  height: 670px;
+  margin-left: 40px;
+}
+
+.register_btn:hover {
+  background-position: right center;
+  color: #fff;
+  text-decoration: none;
+  background-color: rgb(237, 178, 0);
+}
+
+.register_btn:active {
+  transform: scale(0.95);
+}
+
+.register_err {
+  color: rgb(237, 178, 0);
+  font-size: small;
+}
+
+.register_radio_button {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.register_radio_button input[type='radio'] {
+  margin-right: 5px; /* Adjust as needed */
+  width: 15px;
+  height: 15px;
+}
+
+.register_radio_button label {
+  margin-right: 100px; /* Adjust as needed */
 }
