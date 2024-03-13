@@ -4,8 +4,12 @@
   justify-content: center;
   height: 440px;
   margin: 0 30px;
+<<<<<<< HEAD
   max-width: 300px;
   margin-top: 50px;
+=======
+  
+>>>>>>> 19731c4b961f64d2374e4553ebae0087c683cc62
 }
 
 .profile-card {
@@ -21,7 +25,10 @@
   transition: .3s;
   margin: 0 10px;
   margin-right: 60px;
+<<<<<<< HEAD
   margin-top: -290px;
+=======
+>>>>>>> 19731c4b961f64d2374e4553ebae0087c683cc62
 }
 
 .profile-card:hover {

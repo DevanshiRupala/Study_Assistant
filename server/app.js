@@ -269,6 +269,7 @@ app.post('/deletesession',(req,res) => {
   sessions.findByIdAndDelete({_id : id})
   .then((s) => { res.json(s)})
   .catch((e) => { res.status(400).json("error")})
+<<<<<<< HEAD
 })
 
 app.post('/updatesession',async (req,res) => {
@@ -285,4 +286,6 @@ app.post('/fetchsessionbytutor', async (req,res) => {
   const s = await sessions.find({tutor_id : id});
   console.log(s);
   res.json(s)
+=======
+>>>>>>> 19731c4b961f64d2374e4553ebae0087c683cc62
 })

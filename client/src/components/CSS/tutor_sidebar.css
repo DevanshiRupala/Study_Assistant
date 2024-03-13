@@ -7,8 +7,9 @@
     width: 200px;
     /* background: linear-gradient(to right, #54514d, #464646, #474746, #50504f); */
     background-color: rgb(0, 167, 251);
-    color: #fff;
+    color: #000;
     padding: 20px;
+    height: 100%;
   }
   
   .s_sidebar ul {
@@ -21,7 +22,7 @@
   }
   
   .s_sidebar ul li a {
-    color: #fff;
+    color: #000;
     text-decoration: none;
   }
   

@@ -15,7 +15,11 @@ function TutorDashboard() {
     const modalRef = useRef(null);
     const  tutor  = location.state;
     const [session, setSession] = useState(); 
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 19731c4b961f64d2374e4553ebae0087c683cc62
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -43,7 +47,11 @@ function TutorDashboard() {
     function formatDate(dateString) {
         const date = new Date(dateString);
         const day = date.getDate();
+<<<<<<< HEAD
         const month = date.getMonth() + 1; 
+=======
+        const month = date.getMonth() + 1; // Months are zero-based
+>>>>>>> 19731c4b961f64d2374e4553ebae0087c683cc62
         const year = date.getFullYear();
         return `${day}-${month}-${year}`;
     }
@@ -52,6 +60,7 @@ function TutorDashboard() {
         const id = s._id;
         console.log(id);
         axios.post("http://localhost:8000/deletesession",{id})
+<<<<<<< HEAD
         .then((res) => setModalOpen(false)
         )
         .catch((err) => console.log(err))
@@ -74,6 +83,18 @@ function TutorDashboard() {
             [name]: value
         }));
     };
+=======
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err))
+    }
+
+    const onUpdate = async (s) => {
+        const id = s._id;
+        await axios.post("http://localhost:8000/deletesession",id)
+        .then((res) => {alert("session deleted successfully")})
+        .catch((err) => {console.log(err);})
+    }
+>>>>>>> 19731c4b961f64d2374e4553ebae0087c683cc62
     
     return (
         <div>
@@ -129,6 +150,7 @@ function TutorDashboard() {
                             <h2>Session</h2>
                             <div className="input-group">
                                 <label className='session_date'>Date:</label>
+<<<<<<< HEAD
                                 <input type="text" placeholder="Date" name="date" onChange={handleChange} value={formatDate(session.date)} />
                             </div>
                             <div className="input-group">
@@ -165,6 +187,36 @@ function TutorDashboard() {
                                 <button className='Session_button' onClick={() => onUpdate()}>Update</button>
                                 <button className='Session_button' onClick={() => onDelete(session)}>Delete</button>
                             </div>
+=======
+                                <input type="text" placeholder="Date" value={formatDate(session.date)} />
+                            </div>
+                            <div className="input-group">
+                                <label>Start Time:</label>
+                                <input type="time" value={session.start_time} placeholder="Start Time" />
+                                <label>End Time:</label>
+                                <input type="time" value={session.end_time} placeholder="End Time" />
+                            </div>
+                            <div className="input-group">
+                                <label>Grade:</label>
+                                <input type="text" value={session.grade} placeholder="Grade" />
+                                <label>Max Students:</label>
+                                <input type="number" value={session.limit} placeholder="Max Students" />
+                            </div>
+                            <div className="input-group">
+                                <label className='session_date'>Mode:</label>
+                                <input type="text" value={session.mode} placeholder="Mode" />
+                            </div>
+                            <div className="input-group">
+                                <label className='session_date'>Location:</label>
+                                <input type="text" value={session.location} placeholder="Location" />
+                            </div>
+                            <div className="input-group">
+                                <button className='Session_button' onClick={()=>setModalOpen(false)}>OK</button>
+                                <button className='Session_button' onClick={onUpdate}>Update</button>
+                                <button className='Session_button' onClick={() => onDelete(session)}>Delete</button>
+                            </div>
+                            {/* Add more input groups as needed */}
+>>>>>>> 19731c4b961f64d2374e4553ebae0087c683cc62
                         </div>
                     </div>
                 </div>                

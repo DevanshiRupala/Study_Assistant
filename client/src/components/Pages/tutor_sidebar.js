@@ -46,7 +46,11 @@ function Sidebar ({tutor}) {
                             <li><DashboardIcon className='s_dashboard' /><Link to='/tutor_dashboard' state={tutor}>Dashboard</Link></li><br></br> 
                             <li><PersonIcon className='s_person' /><Link to='/tutor' state= {tutor}>Profile</Link></li>
                             <li><ScheduleIcon className='s_session'/><Link to="/session" state={tutor}>Add Session</Link></li>
+<<<<<<< HEAD
                             <li><BookIcon className='s_chart'/><Link to="#">Add Materials</Link></li>
+=======
+                            <li><BarChartIcon className='s_chart'/><Link to="#">Analytics</Link></li>
+>>>>>>> 19731c4b961f64d2374e4553ebae0087c683cc62
                             <li><ExitToAppIcon className='s_logout'/><Link to="/">Logout</Link></li>
                         </ul>
                     </div>
