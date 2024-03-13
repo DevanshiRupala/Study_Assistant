@@ -1,0 +1,54 @@
+.v_session {
+    width: 50%;
+    margin-left: 400px;
+}
+
+.v_session h1 {
+    margin-left: 300px;
+    color: rgb(0, 167, 251);
+}
+
+.v_session ul {
+    list-style: none;
+    padding: 0;
+}
+
+.v_session li {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgb(0, 167, 251);
+    margin-bottom: 20px;
+    padding: 20px;
+}
+
+.v_session p {
+    margin: 0;
+    padding: 5px 0;
+}
+
+.v_session li {
+    background-color: #f8f8f8;
+}
+
+.v_session li:hover {
+    background-color: rgb(243, 230, 121);
+}
+
+.v_session button {
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-left: 20px;
+}
+
+.v_session button:hover {
+  background-color: #217dbb;
+}
+
+.btn_index1 {
+    margin-left: 40px;
+}

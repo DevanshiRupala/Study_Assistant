@@ -32,8 +32,8 @@ import '../CSS/tutor_sidebar.css';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import PersonIcon from '@mui/icons-material/Person';
 import ScheduleIcon from '@mui/icons-material/Schedule';
-import BarChartIcon from '@mui/icons-material/BarChart';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import BookIcon from '@mui/icons-material/Book';
 
 function Sidebar ({tutor}) {
     const navigate = useNavigate();
@@ -43,14 +43,10 @@ function Sidebar ({tutor}) {
             <div className="ss_dashboard">
                     <div className="s_sidebar">
                         <ul>
-                            <li><DashboardIcon className='s_dashboard' /><Link to={`/tutor_dashboard?tutor=${encodeURIComponent(JSON.stringify(tutor))}`}>Dashboard</Link></li><br></br> 
-                            <li><PersonIcon className='s_person' /><Link
-                            onClick={()=>{
-                                        navigate("/tutor", {state :{tutor}})
-                            }}
-                            >Profile</Link></li>
-                            <li><ScheduleIcon className='s_session'/><Link to="/session">Add Session</Link></li>
-                            <li><BarChartIcon className='s_chart'/><Link to="#">Analytics</Link></li>
+                            <li><DashboardIcon className='s_dashboard' /><Link to='/tutor_dashboard' state={tutor}>Dashboard</Link></li><br></br> 
+                            <li><PersonIcon className='s_person' /><Link to='/tutor' state= {tutor}>Profile</Link></li>
+                            <li><ScheduleIcon className='s_session'/><Link to="/session" state={tutor}>Add Session</Link></li>
+                            <li><BookIcon className='s_chart'/><Link to="#">Add Materials</Link></li>
                             <li><ExitToAppIcon className='s_logout'/><Link to="/">Logout</Link></li>
                         </ul>
                     </div>

@@ -1,0 +1,340 @@
+.container-tutor-profile {
+    margin-top: 50px;
+  }
+  
+  .profile-header {
+    display: flex;
+    align-items: center;
+    background-color: #2f90f1;
+    padding: 20px;
+    border-radius: 5px;
+    width: 1500px;
+  }
+
+  .profile-button {
+    z-index: 1;
+    margin-right: 50px;
+    background-color: rgb(237, 213, 0);
+  }
+
+  .profile-button:hover{
+    background-color: rgb(237, 178, 0);
+  }
+  
+  .profile-photo img {
+    width: 150px; /* Adjust as needed */
+    height: 150px; /* Adjust as needed */
+    border-radius: 50%;
+    margin-right: 20px; /* Adjust as needed */
+  }
+  
+  .profile-info {
+    flex: 1;
+  }
+  
+  .profile-info h1 {
+    margin-bottom: 5px;
+  }
+  
+  .profile-section p {
+    margin-top: 30px;
+    margin-left: 190px;
+  }
+  
+  #p1{
+    margin-top: 10px;
+    margin-left: 365.99px;
+  }
+
+ /* CSS for the custom paragraph */
+.custom-paragraph {
+    padding: 20px;
+    background-color: rgba(237, 230, 230, 0.5); /* Adjust the transparency here */
+    border-radius: 5px;
+    margin-left: 20px;
+    margin-right: 30px;
+  }
+
+  .custom-paragraph h2 {
+    border-bottom: 1px solid #ccc; /* Adjust line color and style as needed */
+    padding-bottom: 10px; /* Adjust spacing between line and paragraph */
+    margin-bottom: 10px;
+    margin-left: 20px;
+    margin-right: 30px; /* Adjust spacing between line and paragraph */
+  }
+
+  .custom-paragraph p {
+    margin-left: 30px;
+  }
+
+  /* CSS for the custom paragraph */
+.custom-paragraph1 {
+    padding: 20px;
+  }
+  
+  .custom-paragraph1 h2 {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    margin-left: 35px;
+  }
+  
+  .panels-container {
+    display: flex; /* Use flexbox for side-by-side layout */
+  }
+  
+  .map-panel,
+  .list-panel {
+    flex: 1; /* Each panel takes up equal space */
+    margin-right: 10px;
+    margin-left: 30px; /* Adjust spacing between panels */
+  }
+  
+  .map-panel {
+    /* Example background color for map panel */
+  }
+  
+  .list-panel {
+   
+    padding-top: 10px; 
+    /* Example background color for list panel */
+  }
+
+  .l1 {
+    margin-top: 20px;
+    /* Example background color for list panel */
+  }
+
+  .custom-paragraph2 {
+    padding: 20px;
+    background-color: rgba(237, 230, 230, 0.5); /* Adjust the transparency here */
+    border-radius: 5px;
+    margin-left: 20px;
+    margin-right: 30px;
+    margin-top: 10px;
+  }
+  
+  .custom-paragraph2 h2 {
+    border-bottom: 1px solid #ccc; /* Adjust line color and style as needed */
+    padding-bottom: 10px; /* Adjust spacing between line and paragraph */
+    margin-bottom: 55px;
+    margin-left: 20px;
+    margin-right: 30px;
+     /* Adjust spacing between line and paragraph */
+  }
+  
+  #grade{
+    border-radius: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
+    width: 700px;
+    margin-top: 20px;
+  }
+
+  .radio{
+    margin-left: 900px;
+    margin-top: -80px;
+  }
+
+  #btn1{
+    margin-left: -1px;
+    margin-top: 13px;
+  }
+  #btn2{
+    margin-left: -1px;
+    margin-top: 5px;
+  }
+
+  .sublist{
+    margin-top: 30px;
+  }
+
+  .subject{
+    margin-top: 10px;
+  }
+
+  #subject1{
+    margin-top: 8px;
+  }
+
+  .RequestDetails{
+    margin-left: 900px;
+    margin-top: -130px;
+  }
+
+  #myTextarea{
+    margin-top: 10px;
+    border-bottom: 1px solid #ccc;
+    border-radius: 5px;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-bottom: 20px;
+    padding-right: 20px;
+    
+  }
+
+  .personal h3 {
+    border-bottom: 1px solid #ccc; /* Adjust line color and style as needed */
+    padding-bottom: 10px; /* Adjust spacing between line and paragraph */
+    margin-bottom: 5px;
+    margin-left: 20px;
+    margin-right: 30px;
+    font-size: 25px;
+     /* Adjust spacing between line and paragraph */
+  }
+
+#firstname{
+    margin-left: 20px;
+}
+#firstname1{
+    margin-left: 20px;
+    margin-top: 10px;
+    width: 500px;
+    border-radius: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+.first{
+    margin-left: 20px;
+}
+.last{
+    margin-left: 60px;
+    margin-top: -72px; /* Adjust as needed */
+}
+
+#lastname{
+    margin-left: 560px;
+    margin-top: -100px;
+}
+
+#lastname1 {
+    margin-left: 560px; /* Adjust as needed */
+    margin-top: 10px; /* Adjust as needed */
+    width: 500px; /* Adjust width as needed */
+    border-radius: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    padding-left: 10px; /* Shorter form of padding */
+}
+#stuname{
+    margin-left: 20px;
+    
+}
+#stuname1{
+    margin-left: 20px;
+    margin-top: 10px;
+    width: 500px;
+    border-radius: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+.stu{
+    margin-left: 20px;
+    margin-top: 10px;
+}
+.emai{
+    margin-left: 60px;
+    margin-top: -72px; /* Adjust as needed */
+}
+
+#email{
+    margin-left: 560px;
+    margin-top: -100px;
+}
+
+#email1 {
+    margin-left: 560px; /* Adjust as needed */
+    margin-top: 10px; /* Adjust as needed */
+    width: 500px; /* Adjust width as needed */
+    border-radius: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    padding-left: 10px; /* Shorter form of padding */
+}
+
+#phonno{
+    margin-left: 20px;
+    
+}
+#phonno1{
+    margin-left: 20px;
+    margin-top: 10px;
+    width: 500px;
+    border-radius: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+.phone{
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+.location{
+    margin-left: 60px;
+    margin-top: -72px; /* Adjust as needed */
+}
+
+#loc{
+    margin-left: 560px;
+    margin-top: -100px;
+}
+
+#loc1 {
+    margin-left: 560px; /* Adjust as needed */
+    margin-top: 10px; /* Adjust as needed */
+    width: 500px; /* Adjust width as needed */
+    border-radius: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    padding-left: 10px; /* Shorter form of padding */
+}
+
+.robot{
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+#robo{
+    margin-left: 20px;
+    
+}
+
+.line{
+    border-bottom: 1px solid #ccc;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.button{
+    margin-left: 480px;
+    
+}
+
+#but1{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
+    border-radius: 5px;
+    width: 120px;
+}
+#but2{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
+    border-radius: 5px;
+    width: 120px;
+    margin-left: 10px;
+}

@@ -90,8 +90,8 @@ const Tutor = () => {
     console.log(formdata);
 
     try {
-      const response = await axios.post("http://localhost:8000/submitTutorProfile", formData, { params: formdata });
-      navigate("/tutor_dashboard");
+      await axios.post("http://localhost:8000/submitTutorProfile", formData, { params: formdata })
+      .then((res) => { const tutor = res.data; navigate("/tutor_dashboard", {state:tutor})})
     } catch (error) {
       console.error('Error:', error);
     }

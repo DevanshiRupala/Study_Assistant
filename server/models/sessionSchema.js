@@ -51,12 +51,16 @@ const sessionSchema = new mongoose.Schema({
         enum: ['scheduled', 'completed', 'canceled'],
         default: 'scheduled' // Default status for a session
     },
+    limit:{
+        type: Number,
+        required: true
+    },
     created_at: {
-        type: Date,
+        type: String,
         default: getIndianTimestamp // Default to the current timestamp
     },
     updated_at: {
-        type: Date,
+        type: String,
         default: getIndianTimestamp
     }
 });

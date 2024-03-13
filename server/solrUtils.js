@@ -10,12 +10,14 @@ const solrClient = solr.createClient({
 const indexUser = (user) => {
   const solrDocument = {
     _id: user._id.toString(), 
-    username: user.username,
+    fullName: user.fullName,
     isStudent: user.isStudent, 
     city: user.city,
     state: user.state,
     gender: user.gender,
-    subject: user.subjects
+    subject: user.subjects,
+    email: user.email,
+    gradelevels: user.gradelevels
   };
 
   solrClient.add(solrDocument, (err, obj) => {

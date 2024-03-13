@@ -12,12 +12,14 @@ const SearchTutor = () => {
     state: '',
     subject: ''
   });
+  const [tutors,settutors] = useState();
   const location = useLocation();
   const { student } = location.state;
 
-  const handleSearch = () => {
-    // Implement search functionality here
-    console.log('Search Parameters:', searchParams);
+  const handleSearch = async () => {
+    const res = await axios.post("http://localhost:8000/search",searchParams);
+    console.log(res.data)
+    settutors(res.data);
   };
 
   const handleChange = (e) => {
@@ -27,34 +29,6 @@ const SearchTutor = () => {
       [name]: value
     }));
   };
-
-  // Dummy search results
-  // const dummyData = [
-  //   {
-  //     id: 1,
-  //     title: "Math Tutor",
-  //     description: "Experienced math tutor available for all levels.",
-  //     image: "math_tutor_image_url"
-  //   },
-  //   {
-  //     id: 2,
-  //     title: "Science Tutor",
-  //     description: "Passionate science tutor specializing in biology and chemistry.",
-  //     image: "science_tutor_image_url"
-  //   },
-  //   {
-  //     id: 3,
-  //     title: "English Tutor",
-  //     description: "Certified English teacher offering personalized tutoring sessions.",
-  //     image: "D:\SDP\client\src\images\logo (2).png"
-  //   },
-  //   {
-  //     id: 4,
-  //     title: "English Tutor",
-  //     description: "Certified English teacher offering personalized tutoring sessions.",
-  //     image: "D:\SDP\client\src\images\logo (2).png"
-  //   }
-  // ];
 
 
   return (
@@ -98,19 +72,15 @@ const SearchTutor = () => {
           <button onClick={handleSearch}>Search</button>
         </div>
       </div>
-      <div className="dummy-data-container">
-        {/* {dummyData.map(data => ( */}
-          <DataBox
-            // key={data.id}
-            // photo={data.photo}
-            // username={data.username}
-            // description={data.description}
-          />
-        {/*  */}
-      </div>
+      {tutors && <div className="dummy-data-container">
+        {tutors.map(data => ( 
+          <DataBox tutor = {data}/>
+        ))}
+        </div>
+      }
       </div>
     </div>
-    );
+  );
 }
 
 export default SearchTutor;
