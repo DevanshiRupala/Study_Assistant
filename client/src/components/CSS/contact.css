@@ -54,7 +54,7 @@
 }
 .form-img{
     flex-basis: 50%;
-    background: #f0f4f8;
+    background: rgb(0, 167, 251);
     background-size: cover;
     padding: 40px;
     border-top-right-radius: 8px;
@@ -72,7 +72,7 @@ input{
 }
 .btn:hover,
 button:hover{
-    color: rgb(0, 167, 251);
+    color: rgb(237, 213, 0);
     transition: 0.5s ease;
 }
 .contact-form form{

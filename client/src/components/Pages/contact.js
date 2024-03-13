@@ -1,81 +1,9 @@
-// import React, { useRef } from 'react';
-// import emailjs from '@emailjs/browser';
-// // import { Container, Row, Col, Form, FormGroup, Button } from 'reactstrap'
-// // import { Link } from 'react-router-dom'
-// // import contactus from '../../images/contact_us.jpeg'
-// import '../CSS/contact.css'
-// export const ContactUs = () => {
-//   const form = useRef();
 
-//   const sendEmail = (e) => {
-//     e.preventDefault();
-
-//     emailjs
-//       .sendForm('service_a8g2zac', 'template_w2bbisk', form.current, {
-//         publicKey: 'p87uqnWwKKSNYaJxS',
-//       })
-//       .then(
-//         (result) => {
-//           console.log('SUCCESS!', result.text);
-//         },
-//         (error) => {
-//           console.log('FAILED...', error.text);
-//         },
-//       );
-//   };
-
-//   return (
-//     <form ref={form} onSubmit={sendEmail}>
-//       <label>Name</label>
-//       <input type="text" name="user_name" />
-//       <label>Email</label>
-//       <input type="email" name="user_email" />
-//       <label>Message</label>
-//       <textarea name="message" />
-//       <input type="submit" value="Send" />
-//     </form>
-
-//   );
-// };
-
-// const styles = {
-//   form: {
-//     display: 'flex',
-//     flexDirection: 'column',
-//     maxWidth: '300px',
-//     margin: 'auto',
-//   },
-//   label: {
-//     margin: '5px 0',
-//     fontWeight: 'bold',
-//   },
-//   input: {
-//     padding: '8px',
-//     margin: '5px 0',
-//     borderRadius: '5px',
-//     border: '1px solid #ccc',
-//   },
-//   textarea: {
-//     padding: '8px',
-//     margin: '5px 0',
-//     borderRadius: '5px',
-//     border: '1px solid #ccc',
-//     resize: 'vertical',
-//   },
-//   button: {
-//     padding: '10px',
-//     background: '#4CAF50',
-//     color: 'white',
-//     border: 'none',
-//     borderRadius: '5px',
-//     cursor: 'pointer',
-//   },
-// };
 
 import React, { useRef } from 'react';
 import emailjs from '@emailjs/browser';
 import '../CSS/contact.css';
-import bg from '../../images/bg1.png';
+import bg from '../../images/img_contact.jpeg';
 import { blue } from '@mui/material/colors';
 // import Stuprofile from './sidenav';
 
@@ -92,9 +20,11 @@ export const ContactUs = () => {
       .then(
         (result) => {
           console.log('SUCCESS!', result.text);
+          alert('Message sent successfully!');
         },
         (error) => {
           console.log('FAILED...', error.text);
+          alert('Failed to send message. Please try again.');
         },
       );
   };
@@ -134,7 +64,7 @@ export const ContactUs = () => {
             </form>
           </div>
           <div className="form-img">
-            <img src={bg} alt=''></img>
+            <img src={bg} alt='' style={{width: 800}}></img>
 
           </div>
           

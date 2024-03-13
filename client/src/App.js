@@ -14,6 +14,7 @@ import Student from './components/Pages/student';
 import Tutor from './components/Pages/tutor';
 import KnowMore from './components/Pages/KnowMore';
 import { ContactUs } from './components/Pages/contact';
+import DisplaySessions from './components/Pages/session_display';
 
 function App() {
   
@@ -35,6 +36,7 @@ function App() {
       <Route path='/student' element={<Student/>}/>
       <Route path='/knowmore' element={<KnowMore/>}/>
       <Route path='/contact' element={<ContactUs/>}/>
+      <Route path='/display' element={<DisplaySessions/>}/>
      </Routes>
     </Router>
     </>
