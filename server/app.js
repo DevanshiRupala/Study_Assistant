@@ -156,10 +156,16 @@ app.post("/login_user", async (req, res) => {
   }
 });
 
-app.post("/searchuser", async (req,res) => {
-  const result = await searchUser(req.body.subject,req.body.location,req.body.gender,req.body.state);
-  console.log(result)
-  res.json(result)
+app.post("/search", async (req,res) => {
+  const result = await searchUser(req.body.subject,req.body.city,req.body.gender,req.body.state);
+  console.log(req.body.subject,req.body.city,req.body.gender,req.body.state);
+  console.log(result);
+  const userIds = result
+  .filter(user => user.email && user.email.length > 0) 
+  .map(user => user.email[0]);
+  const tutors = await tutor.find({ email: { $in: userIds } })
+  console.log(tutors)
+  res.json(tutors)
 })
 
 app.post("/submitTutorProfile", upload.single('photo'), async (req,res) => {
@@ -176,24 +182,24 @@ app.post("/submitTutorProfile", upload.single('photo'), async (req,res) => {
     institutions, gradeLevels, hourlyRates, socialProfiles, subjects, languages, facebookProfile, twitterProfile, instagramProfile
     });
     console.log(t);
-    //indexUser(t);
+    indexUser(t);
     await t.save();
 })
 
 app.post("/submitStudentProfile", upload.single('photo'), async (req,res) => {
   const { firstName, lastName, city, state, zipCode, email, school, grade, birthday, s_email, s_pass, s_username, isStudent} = req.query;
   console.log(req.query);
-    const fullName = firstName.trim()+lastName.trim();
-    const hash = bcrypt.hashSync(s_pass, saltRounds);
-    const user = await userdb.create({username:s_username, email:s_email, password:hash, isStudent:isStudent})
-    const student_id = user._id;
-    const profile_picture =  req.body.photo;
-    const t = new Student({
-      student_id, fullName, city, state, zipCode, email, school, grade, birthday, profile_picture
-    });
-    console.log(t);
-    //indexUser(t);
-    await t.save();
+  const fullName = firstName.trim()+lastName.trim();
+  const hash = bcrypt.hashSync(s_pass, saltRounds);
+  const user = await userdb.create({username:s_username, email:s_email, password:hash, isStudent:isStudent})
+  const student_id = user._id;
+  const profile_picture =  req.body.photo;
+  const t = new Student({
+    student_id, fullName, city, state, zipCode, email, school, grade, birthday, profile_picture
+  });
+  console.log(t);
+  //indexUser(t);
+  await t.save();
 })
 
 // const studentPreferences = {
@@ -220,11 +226,11 @@ app.post("/submitStudentProfile", upload.single('photo'), async (req,res) => {
 // });
 
 app.post("/addsession", async (req,res) => {
-  console.log(req.body)
-  tutor_id = '65df6117d1b848aa46a4d327';
-  const { date,start_time,end_time,mode,location,online_meeting_link,status,grade,topic, subject} = req.body;
+  console.log(req.query)
+  const { date,start_time,end_time,mode,location,online_meeting_link,status,grade,topic, subject, limit} = req.body;
+  const {tutor_id} = req.query;
   const s = new sessions({
-    tutor_id,date,start_time,end_time,mode,location,online_meeting_link,status,grade,topic,subject
+    tutor_id,date,start_time,end_time,mode,location,online_meeting_link,status,grade,topic,subject, limit
   })
   await s.save();
 });
@@ -248,3 +254,17 @@ app.get('/fetch', (req, res) => {
     return res.json(files);
   });
 });
+
+app.post('/fetchsession',(req,res) => {
+  sessions.find({tutor_id : req.body.tutor_id})
+  .then((s) => { res.json(s)})
+  .catch((e) => { res.status(400).json("error")})
+})
+
+app.post('/deletesession',(req,res) => {
+  const {id} = req.body;
+  console.log(id)
+  sessions.findByIdAndDelete({_id : id})
+  .then((s) => { res.json(s)})
+  .catch((e) => { res.status(400).json("error")})
+})

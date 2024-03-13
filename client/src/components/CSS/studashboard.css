@@ -54,12 +54,12 @@
   color: #fff;
 }
 
-/* .dummy-data-container {
+.dummy-data-container {
   display: flex;
   margin-left: 200px;
   margin-top: 80px;
   flex-wrap: wrap;
-} */
+}
 
 .part-container {
   flex-direction: column;

@@ -59,7 +59,7 @@ class StudentDetails extends React.Component {
         const { isEditing, studentData } = this.state;
 
         return (
-            <div className='wrapper'>
+            <div className='wrapper'> 
                 <Stuprofile/>
                 <div className="student-profile-container">
                     <div className="student-info-container">

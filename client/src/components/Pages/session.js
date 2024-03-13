@@ -3,6 +3,7 @@ import axios from 'axios';
 import '../CSS/session.css'; 
 import stickyImage from '../../images/sticky-1.png';
 import Sidebar from './tutor_sidebar';
+import { useLocation } from 'react-router-dom';
 
 const SessionForm = () => {
   const [sessionDetails, setSessionDetails] = useState({
@@ -18,6 +19,8 @@ const SessionForm = () => {
     topic: '',
     limit:''
   });
+  const location = useLocation();
+  const tutor = location.state;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -39,14 +42,16 @@ const SessionForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post("http://localhost:8000/addsession", sessionDetails)
+    const tutor_id = tutor.tutor.tutor_id;
+    console.log(tutor_id)
+    axios.post("http://localhost:8000/addsession", sessionDetails, {params : {tutor_id}})
       .then((res) => { console.log(res); })
       .catch((err) => { console.log(err); })
   };
 
   return (
     <div className='wrapper'>
-      <Sidebar/>
+      <Sidebar tutor={tutor}/>
     <div className="session-form-container">
       
       <form onSubmit={handleSubmit} className="session-form">

@@ -6,9 +6,9 @@ import Sidebar from './tutor_sidebar';
 const TutorProfile = () => {
     const [isEditing, setIsEditing] = useState(false);
     const location = useLocation();
-    // const { tutor } = useParams();
-    const {tutor} = location.state
-    console.log(location.state);
+    const [tutor,setTutor] = useState(location.state);
+    //const { tutor } = useParams();
+    console.log(tutor);
 
     // useEffect(() => {
     //     const searchParams = new URLSearchParams(location.search);
@@ -101,11 +101,11 @@ const TutorProfile = () => {
                     </div>
                     {!isEditing ? (
                         <>
-                            <div className='fullname'><h2>{tutor.fullname}</h2></div>
+                            <div className='fullname'><h2>{tutor.tutor.fullName}</h2></div>
                             <div className="personal-info">
                                 <h3>Personal Information</h3>
-                                <p><strong>City:</strong> {tutor.city}</p>
-                                <p><strong>Zipcode:</strong> {tutor.zipcode}</p>
+                                <p><strong>City:</strong> {tutor.tutor.city}</p>
+                                <p><strong>Zipcode:</strong> {tutor.zipCode}</p>
                                 <p><strong>State:</strong> {tutor.state}</p>
                                 <p><strong>Email:</strong> {tutor.email}</p>
                             </div>

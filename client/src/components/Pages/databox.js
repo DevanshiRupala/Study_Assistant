@@ -2,28 +2,17 @@
 import React from 'react';
 import '../CSS/databox.css'
 
-const DummyDataBox = () => {
-  const profiles = [
-    {
-      image: 'https://i.imgur.com/bZBG9PE.jpg',
-      name: 'Kelly Seikma',
-      position: 'Web Designer',
-      bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed condimentum ante et nisl blandit, eu euismod tellus congue.'
-    },
-    
-  ];
+const DummyDataBox = ({tutor}) => {
 
   return (
     <div className="profile-container">
-      {profiles.map((profile, index) => (
-        <div className="profile-card" key={index}>
-          <img src={profile.image} alt="profile" className="profile-icon" />
-          <div className="profile-name">{profile.name}</div>
-          <div className="profile-position">{profile.position}</div>
-          <div className="profile-bio">{profile.bio}</div>
+        <div className="profile-card" key={tutor.tutor_id}>
+          <img src={tutor.profile_picture} alt="profile" className="profile-icon" />
+          <div className="profile-name">{tutor.fullName}</div>
+          <div className="profile-position">{tutor.city}</div>
+          <div className="profile-bio">{tutor.zipCode}</div>
           <a href="#" className="dashbord-button">Connect</a>
         </div>
-      ))}
     </div>
   );
 };

@@ -1,0 +1,28 @@
+
+/* AboutUs.css */
+
+.about-us-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .scrollable-section {
+    max-height: 300px; /* Set the maximum height for scrollable sections */
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .student-section, .tutor-section {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+  }
+  
+  .student-card, .tutor-card {
+    text-align: center;
+  }
+  
+  /* Add more styling as needed */
+  
