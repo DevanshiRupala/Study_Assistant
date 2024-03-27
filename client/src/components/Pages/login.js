@@ -18,7 +18,8 @@ function Login() {
             const res = await axios.post("http://localhost:8000/login_user", { email, pass });
             if (res.status === 200) {
                 const tutor = res.data;
-                navigate('/tutor_dashboard', {state : {tutor:tutor}});
+                const tutor_id = tutor.tutor_id;
+                navigate(`/tutor_dashboard?state=${tutor_id}`);
             } else if (res.status === 201) {
                 const student = res.data;
                 navigate('/studashboard', {state : {student:student}});
@@ -26,6 +27,7 @@ function Login() {
         } catch (err) {
             console.log(err);
             alert(`${err}`);
+            
         }
     };
 

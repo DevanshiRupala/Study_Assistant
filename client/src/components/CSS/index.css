@@ -38,7 +38,7 @@
     border-style: double;
     border-color: rgb(0, 167, 251);
     font-size:18px;
-    color: green;
+    color: rgb(0, 167, 251);
 }
 
 .btn_index:hover {

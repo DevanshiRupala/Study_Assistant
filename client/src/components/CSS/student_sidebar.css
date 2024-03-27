@@ -9,7 +9,7 @@
   .d-sidebar{
     background : rgb(0, 167, 251);
     color: black;
-    height: 100vh;
+    height: 3000px;
     width: 200px;
     transition: all 0.5s;
     margin-left: -10px;

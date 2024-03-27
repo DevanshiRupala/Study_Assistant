@@ -17,7 +17,7 @@ const SessionForm = () => {
     grade: '',
     subject: '',
     topic: '',
-    limit:''
+    limit:'',
   });
   const location = useLocation();
   const tutor = location.state;
@@ -42,7 +42,7 @@ const SessionForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const tutor_id = tutor.tutor.tutor_id;
+    const tutor_id = tutor.tutor_id;
     console.log(tutor_id)
     axios.post("http://localhost:8000/addsession", sessionDetails, {params : {tutor_id}})
       .then((res) => { console.log(res); })

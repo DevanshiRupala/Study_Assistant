@@ -12,11 +12,7 @@ const DummyDataBox = ({tutor}) => {
           <div className="profile-name">{tutor.fullName}</div>
           <div className="profile-position">{tutor.city}</div>
           <div className="profile-bio">{tutor.zipCode}</div>
-<<<<<<< HEAD
           <Link to='/tutorsearched' state={tutor} className="dashbord-button">Connect</Link>
-=======
-          <a href="#" className="dashbord-button">Connect</a>
->>>>>>> 19731c4b961f64d2374e4553ebae0087c683cc62
         </div>
     </div>
   );

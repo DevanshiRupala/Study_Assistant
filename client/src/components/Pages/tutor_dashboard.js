@@ -13,27 +13,25 @@ function TutorDashboard() {
     const [sessions, setSessions] = useState(null);
     const [modalOpen, setModalOpen] = useState(false);
     const modalRef = useRef(null);
-    const  tutor  = location.state;
+    const [tutor, settutor] = useState();
     const [session, setSession] = useState(); 
-<<<<<<< HEAD
     
-=======
-
->>>>>>> 19731c4b961f64d2374e4553ebae0087c683cc62
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const tutor_id = tutor.tutor.tutor_id;
+                const tutor_id = new URLSearchParams(location.search).get("state");
                 console.log(tutor_id)
                 const response = await axios.post("http://localhost:8000/fetchsession", { tutor_id });
-                setSessions(response.data);
+                settutor(response.data.tutor)
+                console.log(tutor)
+                setSessions(response.data.session)
             } catch (error) {
                 console.error(error);
             }
         };
 
         fetchData();
-    }, [tutor.tutor_id]);
+    }, []);
 
     const handleViewMore = (session) => { // Accept session date as argument
         setSession(session); // Set the session date
@@ -47,11 +45,7 @@ function TutorDashboard() {
     function formatDate(dateString) {
         const date = new Date(dateString);
         const day = date.getDate();
-<<<<<<< HEAD
-        const month = date.getMonth() + 1; 
-=======
         const month = date.getMonth() + 1; // Months are zero-based
->>>>>>> 19731c4b961f64d2374e4553ebae0087c683cc62
         const year = date.getFullYear();
         return `${day}-${month}-${year}`;
     }
@@ -60,41 +54,25 @@ function TutorDashboard() {
         const id = s._id;
         console.log(id);
         axios.post("http://localhost:8000/deletesession",{id})
-<<<<<<< HEAD
-        .then((res) => setModalOpen(false)
-        )
-        .catch((err) => console.log(err))
-    }
-
-    const onUpdate = async () => {
-        try {
-            const response = await axios.post("http://localhost:8000/updatesession", session);
-            console.log(response.data); 
-            setModalOpen(false); 
-        } catch (error) {
-            console.error(error);
-        }
-    }
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setSession(prevSession => ({
-            ...prevSession,
-            [name]: value
-        }));
-    };
-=======
         .then((res) => console.log(res))
         .catch((err) => console.log(err))
     }
 
     const onUpdate = async (s) => {
         const id = s._id;
-        await axios.post("http://localhost:8000/deletesession",id)
-        .then((res) => {alert("session deleted successfully")})
+        console.log(id)
+        await axios.post("http://localhost:8000/updatesession",session)
+        .then((res) => {alert("session updated successfully"); setModalOpen(false)})
         .catch((err) => {console.log(err);})
     }
->>>>>>> 19731c4b961f64d2374e4553ebae0087c683cc62
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+    setSession(prevSession => ({
+        ...prevSession,
+        [name]: name === 'date' ? new Date(value) : value
+    }));
+    }
     
     return (
         <div>
@@ -150,73 +128,39 @@ function TutorDashboard() {
                             <h2>Session</h2>
                             <div className="input-group">
                                 <label className='session_date'>Date:</label>
-<<<<<<< HEAD
                                 <input type="text" placeholder="Date" name="date" onChange={handleChange} value={formatDate(session.date)} />
                             </div>
                             <div className="input-group">
                                 <label>Start Time:</label>
-                                <input type="time" value={session.start_time} name="start_time" onChange={handleChange} placeholder="Start Time" />
+                                <input type="time" value={session.start_time} onChange={handleChange} name="start_time" placeholder="Start Time" />
                                 <label>End Time:</label>
-                                <input type="time" value={session.end_time} name="end_time" onChange={handleChange} placeholder="End Time" />
+                                <input type="time" value={session.end_time} onChange={handleChange} name="end_time" placeholder="End Time" />
                             </div>
                             <div className="input-group">
                                 <label>Grade:</label>
-                                <input type="text" value={session.grade} name="grade" onChange={handleChange} placeholder="Grade" />
+                                <input type="text" value={session.grade} onChange={handleChange} name="grade" placeholder="Grade" />
                                 <label>Max Students:</label>
-                                <input type="number" value={session.limit} name="limit" onChange={handleChange} placeholder="Max Students" />
+                                <input type="number" value={session.limit} onChange={handleChange} name="limit" placeholder="Max Students" />
                             </div>
                             <div className="input-group">
                                 <label>Subject:</label>
-                                <input type="text" value={session.subject} name="subject" onChange={handleChange} placeholder="Subject" />
+                                <input type="text" value={session.subject} onChange={handleChange} name="subject" placeholder="Subject" />
                                 <label>Topic:</label>
-                                <input type="text" value={session.topic} name="topic" onChange={handleChange} placeholder="Topic" />
+                                <input type="text" value={session.topic} onChange={handleChange} name="topic" placeholder="Topic" />
                             </div>
                             <div className="input-group">
                                 <label className='session_date'>Mode:</label>
-                                    <select value={session.mode} name="mode" onChange={handleChange}>
-                                        <option value="offline">Offline</option>
-                                        <option value="online">Online</option>
-                                    </select>
+                                <input type="text" value={session.mode} onChange={handleChange} name="mode" placeholder="Mode" />
                             </div>
                             <div className="input-group">
                                 <label className='session_date'>Location:</label>
-                                <input type="text" value={session.location} name="location" onChange={handleChange} placeholder="Location" />
+                                <input type="text" value={session.location} onChange={handleChange} name="location" placeholder="Location" />
                             </div>
                             <div className="input-group">
-                                <button className='Session_button' onClick={()=>setModalOpen(false)}>OK</button>
-                                <button className='Session_button' onClick={() => onUpdate()}>Update</button>
+                                <button className='Session_button' onClick={() => setModalOpen(false)}>OK</button>
+                                <button className='Session_button' onClick={() => onUpdate(session)}>Update</button>
                                 <button className='Session_button' onClick={() => onDelete(session)}>Delete</button>
                             </div>
-=======
-                                <input type="text" placeholder="Date" value={formatDate(session.date)} />
-                            </div>
-                            <div className="input-group">
-                                <label>Start Time:</label>
-                                <input type="time" value={session.start_time} placeholder="Start Time" />
-                                <label>End Time:</label>
-                                <input type="time" value={session.end_time} placeholder="End Time" />
-                            </div>
-                            <div className="input-group">
-                                <label>Grade:</label>
-                                <input type="text" value={session.grade} placeholder="Grade" />
-                                <label>Max Students:</label>
-                                <input type="number" value={session.limit} placeholder="Max Students" />
-                            </div>
-                            <div className="input-group">
-                                <label className='session_date'>Mode:</label>
-                                <input type="text" value={session.mode} placeholder="Mode" />
-                            </div>
-                            <div className="input-group">
-                                <label className='session_date'>Location:</label>
-                                <input type="text" value={session.location} placeholder="Location" />
-                            </div>
-                            <div className="input-group">
-                                <button className='Session_button' onClick={()=>setModalOpen(false)}>OK</button>
-                                <button className='Session_button' onClick={onUpdate}>Update</button>
-                                <button className='Session_button' onClick={() => onDelete(session)}>Delete</button>
-                            </div>
-                            {/* Add more input groups as needed */}
->>>>>>> 19731c4b961f64d2374e4553ebae0087c683cc62
                         </div>
                     </div>
                 </div>                

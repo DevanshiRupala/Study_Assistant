@@ -14,7 +14,7 @@ const SearchTutor = () => {
   });
   const [tutors,settutors] = useState();
   const location = useLocation();
-  const { student } = location.state;
+  const [student,setstudent] = useState();
 
   const handleSearch = async () => {
     const res = await axios.post("http://localhost:8000/search",searchParams);
@@ -29,6 +29,20 @@ const SearchTutor = () => {
       [name]: value
     }));
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+        try {
+            const student_id = new URLSearchParams(location.search).get("state");
+            const response = await axios.post("http://localhost:8000/getstudent", { student_id });
+            setstudent(response.data)
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    fetchData();
+}, []);
 
 
   return (

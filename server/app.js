@@ -3,7 +3,7 @@ const app = express();
 const cors = require('cors');
 const mongoose = require('mongoose');
 const userdb = require('./models/userSchema');
-const tutor = require('./models/tutorSchema');
+const Tutor = require('./models/tutorSchema');
 const Student = require('./models/studentSchema');
 const sessions = require('./models/sessionSchema');
 const File = require('./models/fileSchema');
@@ -18,6 +18,14 @@ const bcrypt = require('bcrypt');
 const saltRounds = 12;
 const OAuth2Strategy = require('passport-google-oauth2').Strategy;
 const { spawn } = require('child_process');
+const RazorPay = require('razorpay');
+
+var instance = new RazorPay({
+  key_id: "rzp_test_hUvLud5nAc9kpa",
+  key_secret: "7xkbk3mlCLjo5JQcbYoueAki"
+})
+
+app.get('/key', (req,res) => {res.json({key:"rzp_test_hUvLud5nAc9kpa"})})
 
 const clientid = "246227139666-eqad5p4ctdgns5gsiv95po9n4daro08c.apps.googleusercontent.com";
 const clientsecret = "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";
@@ -35,20 +43,18 @@ conn.once('open', () => {
 const storage = new GridFsStorage({
     url: 'mongodb://127.0.0.1:27017/study_assistant',
     file: (req, file) => {
+      console.log(req.body)
+      console.log(file)
         return {
             filename: file.originalname,
             bucketName: 'uploads',
             metadata: {
-              tutorId: '65df6117d1b848aa46a4d327' // Store tutor ID with the file metadata
+              tutor_id: req.tutorid // Store tutor ID with the file metadata
             }
         };
     }
 });
-const upload = multer({
-  limits: {
-    fieldSize: 1024 * 1024 * 10, // Increase to 10 MB or adjust as needed
-  },
-});
+const upload = multer({ storage });
 
 const PORT = 8000;
 app.listen(PORT, () => {
@@ -85,13 +91,12 @@ passport.use(new OAuth2Strategy({
 async(accessToken,refreshToken,profile,done)=>{
   console.log(profile);
   try{
-    let user = await userdb.findOne({email:profile.emails[0].value})
-    console.log(user
-      )
-    if (!user){
-      return done(error,null)
+    const user = await userdb.findOne({email:profile.emails[0].value})
+    if (user){
+      console.log(user)
+      return done(null,user)
     }
-    return done(null,user)
+    return done(null,null)
   }catch (error){
      return done(error,null)
   }
@@ -110,13 +115,36 @@ passport.deserializeUser((email,done)=>{
 
 app.get("/auth/google",passport.authenticate("google",{scope:["profile","email"]}));
 
-app.get("/auth/google/callback", (req, res, next) => {
-  passport.authenticate("google", (err, user) => {
-    if (err || !user) {
-      return res.redirect("http://localhost:3000/register");
-    }
-    res.redirect(`http://localhost:3000/studashboard?email=${user.email}`);
+app.get("/auth/google/callback", async (req, res, next) => {
+  passport.authenticate("google", async (err, user) => {
+    try {
+      if (err) {
+        console.error(err);
+        return res.redirect(500, "http://localhost:3000/error");
+      }
+      
+      if (!user) {
+        return res.redirect(302, "http://localhost:3000/register");
+      }
 
+      const u = await userdb.findOne({ email: user.email });
+
+      if (!u) {
+        return res.redirect(302, "http://localhost:3000/register");
+      }
+
+      if (u.isStudent) {
+        const student = await Student.findOne({ student_id: u._id });
+        return res.redirect(302, `http://localhost:3000/studashboard?state=${student.student_id}`);
+      } else {
+        const tutor = await Tutor.findOne({ tutor_id: u._id });
+        console.log(tutor);
+        const tutor_id = tutor.tutor_id;
+        return res.redirect(`http://localhost:3000/tutor_dashboard?state=${tutor_id}`);      }
+    } catch (error) {
+      console.error(error);
+      return res.redirect(500, "http://localhost:3000/error");
+    }
   })(req, res, next);
 });
 
@@ -134,7 +162,7 @@ app.post("/login_user", async (req, res) => {
           res.status(500).json("Re-enter the credentials");
         } else if (result) {
           if(!user.isStudent){
-            const t = await tutor.findOne({tutor_id : user._id});
+            const t = await Tutor.findOne({tutor_id : user._id});
             res.status(200).json(t);
           }
           else{
@@ -163,13 +191,13 @@ app.post("/search", async (req,res) => {
   const userIds = result
   .filter(user => user.email && user.email.length > 0) 
   .map(user => user.email[0]);
-  const tutors = await tutor.find({ email: { $in: userIds } })
+  const tutors = await Tutor.find({ email: { $in: userIds } })
   console.log(tutors)
   res.json(tutors)
 })
 
-app.post("/submitTutorProfile", upload.single('photo'), async (req,res) => {
-  const { firstName, lastName, city, state, zipCode, email, gender, introduction, qualifications, 
+app.post("/submitTutorProfile", async (req,res) => {
+  const { firstName, lastName, city, state, zipCode, email, gender, introduction, qualifications, mode,
     institutions, gradeLevels, hourlyRates, socialProfiles, subjects, languages, facebookProfile, twitterProfile, instagramProfile,
     s_username, s_email, s_pass, isStudent} = req.query;
     const hash = bcrypt.hashSync(s_pass, saltRounds);
@@ -177,8 +205,8 @@ app.post("/submitTutorProfile", upload.single('photo'), async (req,res) => {
     const fullName = firstName.trim()+lastName.trim();
     const tutor_id = user._id;
     const profile_picture = req.body.photo;
-    const t = new tutor({
-      tutor_id,fullName, city, state, zipCode, email, gender, introduction, qualifications, profile_picture,
+    const t = new Tutor({
+      tutor_id,fullName, city, state, zipCode, email, gender, introduction, qualifications, profile_picture, mode,
     institutions, gradeLevels, hourlyRates, socialProfiles, subjects, languages, facebookProfile, twitterProfile, instagramProfile
     });
     console.log(t);
@@ -199,8 +227,8 @@ app.post("/submitStudentProfile", upload.single('photo'), async (req,res) => {
     student_id, fullName, city, state, zipCode, email, school, grade, birthday, profile_picture
   });
   console.log(t);
-  //indexUser(t);
   await t.save();
+  res.json(t);
 })
 
 // const studentPreferences = {
@@ -237,13 +265,8 @@ app.post("/addsession", async (req,res) => {
   res.json("saved");
 });
 
-app.post('/upload', upload.single('file'), (req, res) => {
-  res.json({file : req.file});
-});
-
 app.get('/fetch', (req, res) => {
-  const tutorId = '65df6117d1b848aa46a4d327';
-  console.log("hii")
+  console.log(req)
   if (!gfs) {
     return res.status(500).json({ error: 'GridFS not initialized' });
   }
@@ -257,10 +280,26 @@ app.get('/fetch', (req, res) => {
   });
 });
 
+app.post('/getstudent', (req,res) => {
+  Student.findOne({student_id:req.body.student_id})
+  .then((s) => {res.status(200).json(s)})
+  .catch((err) => res.status(500))
+})
+
 app.post('/fetchsession',(req,res) => {
-  sessions.find({tutor_id : req.body.tutor_id})
-  .then((s) => { res.json(s)})
-  .catch((e) => { res.status(400).json("error")})
+  Tutor.findOne({tutor_id:req.body.tutor_id})
+  .then((tutor) => { tutor.subjects = tutor.subjects.map(subject => subject.replace(/[\[\]"]+/g, ''));
+                     tutor.languages = tutor.languages.map(language => language.replace(/[\[\]"]+/g, ''));
+                    sessions.find({tutor_id : req.body.tutor_id})
+                    .then((s) => { const data = {
+                    tutor: tutor,
+                    session: s
+                  }; 
+                  res.json(data);
+                })
+                .catch((e) => { res.status(400).json("error")})
+  })
+  .catch((err) => {res.status(500)})
 })
 
 app.post('/deletesession',(req,res) => {
@@ -269,7 +308,6 @@ app.post('/deletesession',(req,res) => {
   sessions.findByIdAndDelete({_id : id})
   .then((s) => { res.json(s)})
   .catch((e) => { res.status(400).json("error")})
-<<<<<<< HEAD
 })
 
 app.post('/updatesession',async (req,res) => {
@@ -286,6 +324,19 @@ app.post('/fetchsessionbytutor', async (req,res) => {
   const s = await sessions.find({tutor_id : id});
   console.log(s);
   res.json(s)
-=======
->>>>>>> 19731c4b961f64d2374e4553ebae0087c683cc62
+});
+
+app.post('/uploadfile', (req,res) => {
+  const {tutor_id} = req.query;
+  console.log(tutor_id)
+})
+
+app.post('/payment', async (req,res) => {
+  const options = {
+    amount: 50000,
+    currency:"INR"
+  };
+  const order = await instance.orders.create(options);
+  console.log(order);
+  res.json(order)
 })

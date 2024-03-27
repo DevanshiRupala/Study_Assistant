@@ -27,6 +27,10 @@ const tutorSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    introduction: {
+        type: String,
+        required: true
+    },
     institutions: {
         type: String,
         required: true
@@ -71,6 +75,10 @@ const tutorSchema = new mongoose.Schema({
     languages: {
         type: [String],
         required : true
+    },
+    mode: {
+        type: String,
+        required: true
     },
     created_at: {
         type: String,

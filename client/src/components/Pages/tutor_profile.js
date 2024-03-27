@@ -143,8 +143,8 @@ const Tutor = () => {
             <div className='tutorp_form-row'>
               <label>Gender<span>*</span>:</label>
               <div className="tutorp_gender">
-                <label><input id='female' type="radio" name="gender" value="Female" required />Female</label>
-                <label><input id='male' type="radio" name="gender" value="Male" required />Male</label>
+                <label><input id='female' type="radio" name="gender" value="Female" />Female</label>
+                <label><input id='male' type="radio" name="gender" value="Male" />Male</label>
               </div>
             </div>
           </section>
@@ -213,9 +213,9 @@ const Tutor = () => {
             <div className='tutorp_form-row'>
               <label>Mode<span>*</span>:</label>
               <div className='tutorp_mode'>
-                <label><input type="radio" name="mode" value="Online" required />Online</label>
-                <label><input type="radio" name="mode" value="Offline" required />Offline</label>
-                <label><input type="radio" name="mode" value="Both" required />Both</label>
+                <label><input type="radio" name="mode" value="Online" />Online</label>
+                <label><input type="radio" name="mode" value="Offline" />Offline</label>
+                <label><input type="radio" name="mode" value="Both" />Both</label>
               </div>
             </div>
           </section>
