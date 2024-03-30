@@ -11,11 +11,36 @@ function Register() {
     const [isStudent, setStudent] = useState(false);
     const navigate = useNavigate();
 
+    const isPasswordStrong = (password) => {
+        if (password.length < 8) {
+            return false;
+        }
+        if (!/[a-z]/.test(password)) {
+            return false;
+        }
+        if (!/[A-Z]/.test(password)) {
+            return false;
+        }
+        if (!/\d/.test(password)) {
+            return false;
+        }
+        if (!/[!@#$%^&*]/.test(password)) {
+            return false;
+        }
+        return true;
+    };
+
     const addData = async () => {
-            if (!isStudent)
-                navigate("/tutor_profile", {state : {s_username, s_email, s_pass, isStudent}});
-            else
-                navigate("/student_profile", {state : {s_username, s_email, s_pass, isStudent}});
+        if(isPasswordStrong(s_pass))
+        {
+        if (!isStudent)
+            navigate("/tutor_profile", {state : {s_username, s_email, s_pass, isStudent}});
+        else
+            navigate("/student_profile", {state : {s_username, s_email, s_pass, isStudent}});
+        }
+        else {
+            alert("password skould contain one lowercase,uppercase letter,digit and special character.")
+        }
     };
 
     return (

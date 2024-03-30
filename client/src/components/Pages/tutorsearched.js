@@ -1,14 +1,17 @@
 import React from 'react';
 import '../CSS/tutorsearched.css'; 
 import { useLocation, useNavigate } from 'react-router-dom';
+import { FaRupeeSign } from 'react-icons/fa';
 
 const Tutor = () => {
     const location = useLocation();
-    const tutor = location.state;
+    const tutor = location.state.tutor;
+    const student = location.state.student;
+    console.log(tutor,student)
     const navigate = useNavigate();
 
     const handleviewsession = () => {
-      navigate('/viewsession', {state:{tutor}});
+      navigate('/viewsession', {state:{tutor,student}});
     }
 
   return (
@@ -26,9 +29,6 @@ const Tutor = () => {
         <button className='profile-button' onClick={handleviewsession}>View Sessions</button>
       </div>
       </div>
-      <div className="profile-section">
-        <p><b>Professional Summary :</b> {tutor.professionalSummary}</p>
-      </div>
 
       <div className="profile-section">
         <p><b>Education Background :</b> {tutor.qualifications}</p>
@@ -37,15 +37,19 @@ const Tutor = () => {
 
       <div className="profile-section">
         <p><b>Subject Experience :</b> {tutor.subjects} </p>
-        <p><b>Teaching Environment :</b> {tutor.learningmode}</p>
+        <p><b>Gender :</b> {tutor.gender}</p>
       </div>
 
       <div className="profile-section">
-        <p><b>Teaching Methods :</b> {tutor.teachingMethods}</p>
+        <p><b>Teaching Methods :</b> {tutor.mode}</p>
       </div>
 
       <div className="profile-section">
-        <p><b>Additional Skills and Interests :</b> {tutor.additionalSkillsAndInterests}</p>
+        <p><b>Grade Levels :</b> {tutor.gradeLevels}</p>
+      </div>
+
+      <div className="profile-section">
+        <p style={{display:"flex"}}><b>hourlyRate :</b> {tutor.hourlyRates}<span><FaRupeeSign/></span></p>
       </div>
 
       <div className="profile-section">
@@ -62,9 +66,9 @@ const Tutor = () => {
      <div className="custom-paragraph">
      <h2>Tutor Bio</h2>
       <p>{tutor.introduction}</p>
-      </div>
+      </div><br/>
 
-      <div class="custom-paragraph1">
+      {/* <div class="custom-paragraph1">
   <h2>Availability</h2>
   <div class="panels-container">
     <div class="list-panel">
@@ -77,9 +81,9 @@ const Tutor = () => {
       <p>map is here</p>
     </div>
   </div>
-</div>
+</div> */}
 
-<div className="custom-paragraph2">
+{/* <div className="custom-paragraph2">
     <h2>Tutor Bio</h2>
     <label id='gra'><b>Grade*</b></label><br></br>
     <input type="text" id="grade" name="grade"></input>
@@ -147,7 +151,7 @@ const Tutor = () => {
             <button id='but2'>Submit</button>
         </div>
     </div>
-    </div>
+    </div> */}
 </div>    
   );
 };

@@ -34,7 +34,9 @@ const SearchTutor = () => {
     const fetchData = async () => {
         try {
             const student_id = new URLSearchParams(location.search).get("state");
+            console.log(student_id)
             const response = await axios.post("http://localhost:8000/getstudent", { student_id });
+            console.log(response)
             setstudent(response.data)
         } catch (error) {
             console.error(error);
@@ -88,7 +90,7 @@ const SearchTutor = () => {
       </div>
       {tutors && <div className="dummy-data-container">
         {tutors.map(data => ( 
-          <DataBox tutor = {data}/>
+          <DataBox tutor = {data} student = {student}/>
         ))}
         </div>
       }

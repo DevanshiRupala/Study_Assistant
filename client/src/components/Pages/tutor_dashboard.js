@@ -33,8 +33,8 @@ function TutorDashboard() {
         fetchData();
     }, []);
 
-    const handleViewMore = (session) => { // Accept session date as argument
-        setSession(session); // Set the session date
+    const handleViewMore = (session) => { 
+        setSession(session); 
         setModalOpen(true);
     };
 
@@ -45,7 +45,7 @@ function TutorDashboard() {
     function formatDate(dateString) {
         const date = new Date(dateString);
         const day = date.getDate();
-        const month = date.getMonth() + 1; // Months are zero-based
+        const month = date.getMonth() + 1; 
         const year = date.getFullYear();
         return `${day}-${month}-${year}`;
     }

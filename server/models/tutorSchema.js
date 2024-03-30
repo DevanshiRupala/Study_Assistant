@@ -23,6 +23,10 @@ const tutorSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    gradeLevels: {
+        type: String,
+        required: true
+    },
     qualifications: {
         type: String,
         required: true

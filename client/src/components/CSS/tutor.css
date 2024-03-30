@@ -64,7 +64,7 @@
     width: 160px;
     height: 170px;
     border-radius: 50%;
-    background: linear-gradient(to right, rgb(7, 124, 221), rgb(70, 137, 219));
+    background: linear-gradient(to right, rgb(255, 255, 255), rgb(255, 255, 255));
     cursor: pointer;
     display: flex;
     justify-content: center;
@@ -116,7 +116,7 @@
     width: 500px;
     height: 40px;
     padding-top: 10px;
-    margin-top: 1px;
+    margin-top: -100px;
     text-align: left;
     padding-left: 20px;
     background: linear-gradient(to right, rgb(7, 124, 221), rgb(70, 137, 219));
@@ -166,7 +166,8 @@
 }
 
 .other-details1 {
-    width: 600px;
+    margin-top: -150px;
+    width: 550px;
 }
 
 .personal-info1 input {
@@ -201,7 +202,9 @@
 }
 
 .other-details1 textarea {
+    width: 370px;
     height: 100px;
+    margin-left: -25px;
 }
 
 button {
@@ -223,16 +226,93 @@ button:hover {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
+    width: 520px;
 }
 
 .input-row label {
     margin-right: 10px;
+    margin-left: 20px;
 }
 
 .input-row input {
     margin-right: 10px;
+    margin-left: -40px;
+}
+.input-row2 {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    margin-top: -30px;
 }
 
-.input-row .new-language {
-    margin-top: 10px;
+.input-row2 label {
+    margin-right: 10px;
+    margin-left: 20px;
+}
+
+.input-row2 input {
+    margin-left: 20px;
+    width: 370px;
+}
+
+.input-row3 input {
+    margin-left: 140px;
+    width: 370px;
+}
+
+.input-row1 {
+    display: flex;
+    align-items: center;
+    margin-top: -25px;
+}
+
+.input-row1 label {
+    margin-right: 120px;
+    margin-top: -80px;
+    margin-left: 22px;
+    
+}
+
+
+.language-list {
+    margin-bottom: 10px;
+}
+
+.language-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.language-item label {
+    margin-bottom: 5px;
+    margin-left: 20px;
+    
+}
+
+.language-row {
+    display: flex;
+    align-items: center;
+    width: 370px;
+    margin-left: 170px;
+    margin-top: -30px;
+    margin-bottom: 30px;
+    margin-left: 140px;
+}
+
+.language-row input {
+    margin-right: 5px;
+}
+
+.language-row button {
+    margin-left: 5px;
+    width: 10px;
+    height: 10px;
+}
+
+.language-row button:first-child {
+    margin-left: auto;
+}
+
+.tutor_edit_btn:hover {
+    color: #110404;
 }

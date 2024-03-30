@@ -3,8 +3,8 @@
   align-items: center;
   justify-content: center;
   height: 440px;
-  margin-left: -20px;
-  
+  margin-left: -20px; 
+  box-shadow: rgb(0, 0, 0, 0.7);
 }
 
 .profile-card {
@@ -36,25 +36,25 @@
 }
 
 .profile-name {
-  font-size: 24px;
+  font-size: 18px;
   font-weight: bold;
   margin: 25px 0 10px 0;
 }
 
 .profile-position {
-  font-size: 18px; /* Increase font size for profession */
+  font-size: 18px; 
   color: #777;
 }
 
 .profile-bio {
-  font-size: 14px; /* Adjust font size for bio */
+  font-size: 14px; 
   color: #333;
-  margin-top: 10px; /* Add margin between profession and bio */
-  text-align: center; /* Center align the bio */
+  margin-top: 10px; 
+  text-align: center; 
 }
 
 .dashbord-button{
-  margin: 20px 0; /* Reduce margin for button */
+  margin: 20px 0; 
   padding: 10px 30px;
   color: #999;
   text-decoration: none;
@@ -64,22 +64,22 @@
 
 .dashbord-button:hover {
   color: #fff;
-  background: #748dff;
-  border: 1px solid #748dff;
+  background: rgb(237, 178, 0);
+  border: 1px solid rgb(237, 178, 0);
 }
 
 @media screen and (max-width: 1000px) {
   .profile-name {
-      font-size: 20px; /* Adjust font size for smaller screens */
+    font-size: 20px; 
   }
 }
 
 @media screen and (max-width: 800px) {
   .profile-card {
-      padding: 20px 15px;
+    padding: 20px 15px;
   }
 
   .profile-name {
-      font-size: 18px;
+    font-size: 18px;
   }
 }

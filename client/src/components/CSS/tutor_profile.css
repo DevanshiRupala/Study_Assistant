@@ -1,5 +1,11 @@
+.tutor_body {
+  background: linear-gradient(to right, #82c9ed,#eff4ae,#f8fcbf,#97dbef,#b2e5ff,#f8fcbf);
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
 .tutorp_light-purple-background {
-  background-color: #f5e6ff; /* Light purple color */
+  background-color: aliceblue; /* Light purple color */
   padding-bottom:30px ;
 }
 
@@ -8,12 +14,11 @@
   margin: 20px auto; /* Add top and bottom margin for better spacing from viewport edges */
   padding: 25px; /* Increase padding for more internal space */
   border: 2px solid #ccc; /* Make border slightly thicker for better visual structure */
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Soften the box-shadow for a subtler 3D effect */
-  
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4); /* Soften the box-shadow for a subtler 3D effect */
 }
 
 .tutorp_h2 {
-  border-bottom: 3px dashed #e88617; /* Make the dashed line solid for clearer separation */
+  border-bottom: 3px dashed #000000; /* Make the dashed line solid for clearer separation */
   padding-bottom: 5px; /* Reduce padding for a tighter look */
   font-size: 24px; /* Increase font size for importance */
   color: #333; /* Ensure text color is harmonious with the theme */
@@ -43,7 +48,7 @@
   align-items: center;
   font-size: 20px; /* Adjust the font size of the text/icon */
   color: #888; /* Text color */
-  border: 2px dashed #aaa; /* Border style */
+  border: 2px dashed #000000; /* Border style */
   cursor: pointer;
   margin-bottom: 20px;
 }
@@ -89,7 +94,7 @@ textarea {
   padding: 20px; /* Increase padding for easier text entry */
   margin-right: 10px; /* Adjust spacing between form elements */
   border-radius: 5px;
-  border: 2px solid #f4f1f1; /* Soften border color for gentler focus */
+  border: 2px solid #f3da81; /* Soften border color for gentler focus */
 }
 .tutorp_email1{
   /* flex: 1;  */
@@ -102,7 +107,7 @@ textarea {
   margin-left: -90px;
   padding: 20px;
   border-radius: 5px;
-  border: 2px solid #f4f1f1;
+  border: 2px solid #f3da81;
   margin-top: 3px;
   margin-bottom: 10px;
 }
@@ -114,7 +119,7 @@ textarea {
 }
 /* Style the plus and minus buttons */
 .tutorp_btn3 {
-  background-color: #586d84;
+  background-color: #f3da81;
   color: #fff;
    /* Increase padding for larger buttons */
   border-radius: 50%; /* Make the buttons circular */
@@ -127,9 +132,13 @@ textarea {
   justify-content: center;
 }
 
+.tutorp_btn3:hover {
+  color: #000000;
+}
+
 /* Style the submit button */
 .tutorp_button[type='submit'] {
-  background-color: #586d84;
+  background-color: #f3da81;
   color: #fff;
   padding: 10px 20px;
   border-radius: 5px;
@@ -142,13 +151,22 @@ textarea {
   background-color: #0056b3;
 }
 
+.p_btn {
+  background-color: #0056b3;
+}
+
+.p_btn:hover {
+  background-color: rgb(237, 213, 0);
+  color: #000000;
+}
+
 /* Add spacing between first and last name inputs */
 .tutorp_name-container #firstName {
   flex: 1;
   width: 300px; 
   padding: 20px;
   border-radius: 5px;
-  border: 2px solid #f4f1f1;
+  border: 2px solid #f3da81;
 }
 
 .tutorp_name-container #lastName {
@@ -156,7 +174,7 @@ textarea {
   width: 300px; 
   padding: 20px;
   border-radius: 5px;
-  border: 2px solid #f4f1f1;
+  border: 2px solid #f3da81;
 }
 
 /* Adjust the width and alignment of the city-state containers */
@@ -165,7 +183,7 @@ textarea {
   width: 182px; 
   padding: 20px;
   border-radius: 5px;
-  border: 2px solid #f4f1f1;
+  border: 2px solid #f3da81;
 }
 
 .tutorp_city-state-container #state {
@@ -173,7 +191,7 @@ textarea {
   width: 182px; 
   padding: 20px;
   border-radius: 5px;
-  border: 2px solid #f4f1f1;
+  border: 2px solid #f3da81;
 }
 
 .tutorp_city-state-container #zipCode {
@@ -181,7 +199,7 @@ textarea {
   width: 182px; 
   padding: 20px;
   border-radius: 5px;
-  border: 2px solid #f4f1f1;
+  border: 2px solid #f3da81;
 }
 /* Align the label and email input horizontally */
 .tutorp_label_email {

@@ -1,17 +1,18 @@
 .s_body{
-  background: linear-gradient(to right, #5aa0c3, #48b9db, #5ea1c8, #649ecb);
+  background: linear-gradient(to right, #82c9ed,#eff4ae,#f8fcbf,#97dbef,#b2e5ff,#f8fcbf);
+  padding-bottom: 35px;
+  padding-top: 25px;
 }
 .student_profile-container {
   width: 1000px;
-  height: 700px;
+  height: 775px;
   margin-left: 230px;
   padding: 20px;
   border-radius: 5px;
   border: 2px solid #f4f1f1;
-  /* margin-top: 4px; */
   background-color: aliceblue;
-  
-  
+  margin-top: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
 }
 
 .student_profile-form-row {
@@ -23,11 +24,11 @@
 
 .student_profile-form-column {
   flex: 1;
-   margin-right: 80px; 
+  margin-right: 80px; 
 }
 
 .student_profile-circle {
-  width: 170px;
+  width: 140px;
   height: 150px;
   border-radius: 50%;
   background-color: white;
@@ -37,7 +38,6 @@
   color: #110404;
   border-style: dashed;
   border-color: #110404;
-  /* margin-left: -5px; */
 }
 
 .student_profile-circle img {
@@ -73,8 +73,8 @@
   padding-top: 13px;
  padding-bottom: 13px;
   border-radius: 5px;
-  
-  border: 1px solid #ccc;
+  padding-left: 5px;
+  border: 1px solid #f3da81;
 }
 
 .student_profile-container button {
@@ -89,7 +89,8 @@
 }
 
 .student_profile-container button:hover {
-  background-color: rgb(224, 109, 27);
+  background-color: rgb(237, 213, 0);
+  color:#110404;
 }
 
 .student_profile-name-row {

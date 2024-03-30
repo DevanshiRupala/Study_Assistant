@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "../CSS/login.css";
 import axios from 'axios';
 import Image1 from "../../images/anim-1-1.gif";
+import { Google } from '@mui/icons-material';
 
 function Login() {
     const [email, setEmail] = useState("");
@@ -22,7 +23,7 @@ function Login() {
                 navigate(`/tutor_dashboard?state=${tutor_id}`);
             } else if (res.status === 201) {
                 const student = res.data;
-                navigate('/studashboard', {state : {student:student}});
+                navigate(`/studashboard?state=${student.student_id}`);
             }
         } catch (err) {
             console.log(err);
@@ -82,7 +83,7 @@ function Login() {
                         </button>
                     </form>
                     <label className="login_or">Or</label>
-                    <button onClick={google} type="submit" className="login_btn1">
+                    <button onClick={google} type="submit" className="login_btn1" style={{display:"flex"}}>&nbsp;&nbsp;&nbsp;&nbsp;<span><Google/></span>&nbsp;
                         Continue with google
                     </button>
                 </div>

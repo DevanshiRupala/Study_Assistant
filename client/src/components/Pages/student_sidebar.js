@@ -8,9 +8,12 @@ const Stuprofile = ({ student, children }) => {
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
     console.log(student)
-    const menuItem = [
+    let menuItem = [];
+    if(student) {
+        console.log(student.student_id)
+    menuItem = [
         {
-            path: "/student",
+            path: `/student?state=${student.student_id}`,
             name: "Profile",
             icon: <FaUserAlt />
         },
@@ -25,7 +28,7 @@ const Stuprofile = ({ student, children }) => {
             icon: <FaPersonBooth />
         },
 
-    ]
+    ] }
 
     return (
         <div className="d-container">
@@ -38,7 +41,7 @@ const Stuprofile = ({ student, children }) => {
                     </div>
 
                 </div>
-                {
+                { student &&
                     menuItem.map((item, index) => (
                         <NavLink to={item.path} key={index} className="d-link" activeclassName="active">
                             <div className="d-icon">{item.icon}</div>

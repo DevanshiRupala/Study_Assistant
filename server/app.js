@@ -39,7 +39,6 @@ conn.once('open', () => {
     gfs.collection('uploads');
 });
 
-// Create storage engine using GridFS
 const storage = new GridFsStorage({
     url: 'mongodb://127.0.0.1:27017/study_assistant',
     file: (req, file) => {
@@ -49,7 +48,7 @@ const storage = new GridFsStorage({
             filename: file.originalname,
             bucketName: 'uploads',
             metadata: {
-              tutor_id: req.tutorid // Store tutor ID with the file metadata
+              tutor_id: req.tutorid 
             }
         };
     }
@@ -196,13 +195,13 @@ app.post("/search", async (req,res) => {
   res.json(tutors)
 })
 
-app.post("/submitTutorProfile", async (req,res) => {
+app.post("/submitTutorProfile",upload.single('photo'), async (req,res) => {
   const { firstName, lastName, city, state, zipCode, email, gender, introduction, qualifications, mode,
     institutions, gradeLevels, hourlyRates, socialProfiles, subjects, languages, facebookProfile, twitterProfile, instagramProfile,
     s_username, s_email, s_pass, isStudent} = req.query;
     const hash = bcrypt.hashSync(s_pass, saltRounds);
     const user = await userdb.create({ username: s_username, email: s_email, password: hash, isStudent: isStudent});
-    const fullName = firstName.trim()+lastName.trim();
+    const fullName = firstName.trim()+" "+lastName.trim();
     const tutor_id = user._id;
     const profile_picture = req.body.photo;
     const t = new Tutor({
@@ -216,15 +215,15 @@ app.post("/submitTutorProfile", async (req,res) => {
 })
 
 app.post("/submitStudentProfile", upload.single('photo'), async (req,res) => {
-  const { firstName, lastName, city, state, zipCode, email, school, grade, birthday, s_email, s_pass, s_username, isStudent} = req.query;
+  const { firstName, lastName, city, state, zipCode, email, facebookProfile, instagramProfile, twitterProfile, school, grade, birthday, s_email, s_pass, s_username, isStudent} = req.query;
   console.log(req.query);
-  const fullName = firstName.trim()+lastName.trim();
+  const fullName = firstName.trim()+" "+lastName.trim();
   const hash = bcrypt.hashSync(s_pass, saltRounds);
   const user = await userdb.create({username:s_username, email:s_email, password:hash, isStudent:isStudent})
   const student_id = user._id;
   const profile_picture =  req.body.photo;
   const t = new Student({
-    student_id, fullName, city, state, zipCode, email, school, grade, birthday, profile_picture
+    student_id, fullName, city, state, zipCode, facebookProfile, instagramProfile, twitterProfile, email, school, grade, birthday, profile_picture
   });
   console.log(t);
   await t.save();
@@ -286,18 +285,30 @@ app.post('/getstudent', (req,res) => {
   .catch((err) => res.status(500))
 })
 
+app.post('/updatestudent', async(req,res) => {
+  const _id = req.body.student._id;
+  console.log(_id)
+  const student = req.body.student;
+  console.log(student)
+  const r = await Student.findByIdAndUpdate(_id, student,{new:true})
+  if (!r) {
+    res.status(404).json({ error: 'Student not found' });
+  }
+  res.json(r)
+})
+
 app.post('/fetchsession',(req,res) => {
   Tutor.findOne({tutor_id:req.body.tutor_id})
   .then((tutor) => { tutor.subjects = tutor.subjects.map(subject => subject.replace(/[\[\]"]+/g, ''));
                      tutor.languages = tutor.languages.map(language => language.replace(/[\[\]"]+/g, ''));
-                    sessions.find({tutor_id : req.body.tutor_id})
-                    .then((s) => { const data = {
-                    tutor: tutor,
-                    session: s
-                  }; 
-                  res.json(data);
-                })
-                .catch((e) => { res.status(400).json("error")})
+        sessions.find({tutor_id : req.body.tutor_id})
+        .then((s) => { const data = {
+        tutor: tutor,
+        session: s
+      }; 
+      res.json(data);
+    })
+    .catch((e) => { res.status(400).json("error")})
   })
   .catch((err) => {res.status(500)})
 })
@@ -332,8 +343,9 @@ app.post('/uploadfile', (req,res) => {
 })
 
 app.post('/payment', async (req,res) => {
+  const {amount} = req.body;
   const options = {
-    amount: 50000,
+    amount: amount*100,
     currency:"INR"
   };
   const order = await instance.orders.create(options);

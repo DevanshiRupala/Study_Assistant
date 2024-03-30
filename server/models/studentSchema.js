@@ -11,6 +11,10 @@ const studentSchema = new mongoose.Schema({
         ref: 'User', 
         required: true
     },
+    fullName: {
+        type: String,
+        required: true,
+    },
     email: {
         type: String,
         required: true,
@@ -36,6 +40,22 @@ const studentSchema = new mongoose.Schema({
         required: true
     },
     state: {
+        type: String,
+        required: true
+    },
+    zipCode: {
+        type: String,
+        required: true
+    },
+    facebookProfile: {
+        type: String,
+        required: true
+    },
+    instagramProfile: {
+        type: String,
+        required: true
+    },
+    twitterProfile: {
         type: String,
         required: true
     },

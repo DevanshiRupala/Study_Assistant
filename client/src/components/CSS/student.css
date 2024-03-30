@@ -11,9 +11,12 @@
 .student-info-container {
     display: flex;
     width: calc(50% - 20px); /* 50% width minus padding */
+    margin-left:240px;
+    height: 580px;
+    margin-top: 50px;
 }
 
-.left-box {
+.student-info-left-box {
     width: 100%;
     padding: 20px;
     display: flex;
@@ -24,8 +27,8 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow effect */
 }
 
-.right-box {
-    width: 1000px; /* 50% width minus padding */
+.student-info-right-box {
+    width: 900px; /* 50% width minus padding */
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -47,8 +50,7 @@
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 3px;
-    box-sizing: border-box;
-    width: calc(100% - 170px - 20px); /* Calculate width minus label width and margin */
+    box-sizing: border-box; /* Calculate width minus label width and margin */
 }
 
 .photo-container {
@@ -80,7 +82,7 @@
 
 .studentfullname {
     margin-bottom: 10px;
-    
+    margin-top: 15px;  
 }
 
 .links {
@@ -119,6 +121,7 @@
     display: flex;
     align-items: center;
     margin-bottom: 10px;
+    max-width: 400px;
 }
 
 .input-row label {
@@ -129,7 +132,7 @@
 .input-row input {
     flex: 1;
     padding: 8px;
-    width: 200px;
+    width: 100px;
     border: 1px solid #ccc;
     border-radius: 3px;
     box-sizing: border-box;
@@ -149,4 +152,18 @@ button {
 
 button:hover {
     background-color: rgb(224, 109, 27);
+}
+
+.socialprofiles input {
+    flex: 1;
+    padding: 8px;
+    width: 150px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+    margin-left: 20px;
+}
+
+.editprofile:hover{
+    color: #110404;
 }

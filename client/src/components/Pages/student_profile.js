@@ -54,7 +54,7 @@ const StudentRegistrationForm = () => {
         try {
             const response = await axios.post("http://localhost:8000/submitStudentProfile", formData, {params : formdata});
             const student = response.data;
-            navigate('/studashboard', {state : {student}});
+            navigate(`/studashboard?state=${student.student_id}`);
         } catch (error) {
             console.error('Error:', error);
         }
@@ -76,7 +76,7 @@ const StudentRegistrationForm = () => {
                     <div className='student_profile-profile-title'>
                         <h2>Student Profile</h2>
                     </div>
-                    <label htmlFor="fullName">Full Name<span>*</span>:</label>
+                    <label htmlFor="fullName">Full Name<span style={{color:'red'}}>*</span>:</label>
                     <div className="student_profile-name-row">
                         <input type="text" id="firstName" name="firstName" placeholder="First Name" onChange={(e)=>setfname(e.target.value)} required/>
                         <input type="text" id="lastName" name="lastName" placeholder="Last Name" onChange={(e)=>setlname(e.target.value)} required/>
@@ -95,29 +95,29 @@ const StudentRegistrationForm = () => {
             <form className="student_profile-student-registration-form" onSubmit={handleSubmit}>
                 <div className='student_profile-form-row'>
                     <div className='student_profile-form-column'>
-                        <label htmlFor="email">Email:</label>
+                        <label htmlFor="email">Email<span style={{color:'red'}}>*</span>:</label>
                         <input type="email" name="email" placeholder='Email' required/>
                     </div>
                 </div>
                 <div className='student_profile-form-row'>
                     <div className='student_profile-form-column'>
-                        <label htmlFor="educationLevel">Education Level:</label>
+                        <label htmlFor="educationLevel">Education Level<span style={{color:'red'}}>*</span>:</label>
                         <input type="text" name="grade" placeholder='Grade' required/>
                     </div>
                     <div className='student_profile-form-column'>
                         <label htmlFor="birthDate">Birth Date:</label>
-                        <input type="date" name="birthday" required/>
+                        <input type="date" name="birthday" />
                     </div>
                 </div>
                 <div className='student_profile-form-row'>
                     <div className='student_profile-form-column'>
-                        <label htmlFor="schoolName">School Name:</label>
+                        <label htmlFor="schoolName">School Name<span style={{color:'red'}}>*</span>:</label>
                         <input type="text" name="school" placeholder='School Name' required/>
                     </div>
                 </div>
                 <div className='student_profile-form-row'>
                 <div className='student_profile-form-column'>
-                        <label>Address<span>*</span>:</label>
+                        <label>Address<span style={{color:'red'}}>*</span>:</label>
                         <div className="student_profile-address-row">
                             <input type="text" id="city" name="city" placeholder='City' required/>
                             <input type="text" id="state" name="state" placeholder='State' required/>
@@ -125,10 +125,20 @@ const StudentRegistrationForm = () => {
                         </div>
                     </div>
                 </div>
+                <div className='student_profile-form-row'>
+                <div className='student_profile-form-column'>
+                        <label>Social Profiles:</label>
+                        <div className="student_profile-address-row">
+                            <input type="text" id="facebook" name="facebookProfile" placeholder='FacebookProfile'/>
+                            <input type="text" id="instagram" name="instagramProfile" placeholder='InstagramProfile'/>
+                            <input type="text" id="twitter" name="twitterProfile" placeholder='TwitterProfile'/>
+                        </div>
+                    </div>
+                </div><br/>
                 <button type="submit">Submit</button>
             </form>
         </div>
-        </div>
+    </div>
     );
 }
 

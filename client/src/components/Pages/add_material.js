@@ -16,7 +16,7 @@ const FileUploadForm = () => {
 
     let formData = new FormData();
     formData.append('file', file);
-    formData.append('tutor_id',tutor.tutor_id)
+    formData.append('tutor_id',tutor.tutor_id);
 
     try {
       const response = await axios.post('http://localhost:8000/uploadfile', {params : {formData}}, {
@@ -43,7 +43,7 @@ const FileUploadForm = () => {
       key: "rzp_test_hUvLud5nAc9kpa", 
       amount: order.amount, 
       currency: "INR",
-      name: "Acme Corp", 
+      name: "Devanshi Rupala", 
       description: "Test Transaction",
       image: "https://example.com/your_logo",
       order_id: order.id, 

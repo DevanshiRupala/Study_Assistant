@@ -1,4 +1,3 @@
-/* tutor_profile.js */
 import React, { useState, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -73,15 +72,17 @@ const Tutor = () => {
     const formInputs = form.elements;
     for (let i = 0; i < formInputs.length; i++) {
       const input = formInputs[i];
-      if (input.type !== 'file') {
+      if (input.type === 'radio' && input.checked) {
+        formData1.append(input.name, input.value);
+      } else if (input.type !== 'file' && input.type !== 'radio') {
         formData1.append(input.name, input.value);
       }
     }
 
     const subjectsArray = subjectFields.map(field => field.value);
     const languagesArray = languageFields.map(field => field.value);
-    formData1.append('subjects', JSON.stringify(subjectsArray));
-    formData1.append('languages', JSON.stringify(languagesArray));
+    formData1.append('subjects', subjectsArray);
+    formData1.append('languages', languagesArray);
     formData1.append('s_username', s_username);
     formData1.append('s_email', s_email);
     formData1.append('s_pass', s_pass);
@@ -91,13 +92,14 @@ const Tutor = () => {
 
     try {
       await axios.post("http://localhost:8000/submitTutorProfile", formData, { params: formdata })
-      .then((res) => { const tutor = res.data; navigate("/tutor_dashboard", {state:tutor})})
+      .then((res) => { const tutor = res.data; navigate(`/tutor_dashboard?state=${tutor.tutor_id}`)})
     } catch (error) {
       console.error('Error:', error);
     }
   };
 
   return (
+    <div className='tutor_body'>
     <div className='tutorp_TutorBox tutorp_light-purple-background'>
       <div className='tutorp_Tutor'>
         <form className="tutorp_tutor-profile-form" onSubmit={handleSubmit} encType="multipart/form-data">
@@ -134,7 +136,7 @@ const Tutor = () => {
             </div>
             <div className='tutorp_form-row'>
               <div className='tutorp_label_email'>
-                <label htmlFor="email">Email:</label>
+                <label htmlFor="email">Email<span>*</span>:</label>
               </div>
               <div className='tutorp_email1'>
                 <input type="email" id="email" name="email" placeholder='Email' required />
@@ -237,7 +239,7 @@ const Tutor = () => {
                 />
                 {index === 0 && (
                   <button className='tutorp_btn3'  onClick={() => handleAddLanguageField()}>
-                    <FontAwesomeIcon icon={faPlus} style={{ marginRight: '5px' }} />
+                    <FontAwesomeIcon icon={faPlus} style={{ marginRight: '2px' }} />
                   </button>
                 )}
                 {index > 0 && (
@@ -269,10 +271,10 @@ const Tutor = () => {
             </div>
           </div>
         </section>
-
-          <button className="p_btn" type="submit">Submit</button>
+        <button className="p_btn" type="submit">Submit</button>
         </form>
       </div>
+    </div>
     </div>
   );
 }

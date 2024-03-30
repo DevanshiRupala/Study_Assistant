@@ -19,6 +19,7 @@
 
   .profile-button:hover{
     background-color: rgb(237, 178, 0);
+    color: black;
   }
   
   .profile-photo img {
