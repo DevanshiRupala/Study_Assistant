@@ -6,7 +6,7 @@ const userdb = require('./models/userSchema');
 const Tutor = require('./models/tutorSchema');
 const Student = require('./models/studentSchema');
 const sessions = require('./models/sessionSchema');
-const File = require('./models/fileSchema');
+const Payment = require('./models/paymentSchema');
 const path = require('path');
 const Grid = require('gridfs-stream');
 const { GridFsStorage } = require('multer-gridfs-storage');
@@ -298,13 +298,28 @@ app.post('/updatestudent', async(req,res) => {
 })
 
 app.post('/fetchsession',(req,res) => {
+  let totalAmountEarned = 0;
+  Payment.aggregate([
+    { $match: { tutor_id: req.body.tutor_id } }, 
+    { $group: { _id: null, totalAmount: { $sum: '$amount' } } }, 
+  ])
+  .then((result) => {
+    totalAmountEarned = result.length > 0 ? result[0].totalAmount : 0;
+    console.log("Total amount earned by tutor:", totalAmountEarned,result);
+  })
+  .catch((error) => {
+    console.error("Error while calculating total amount earned by tutor:", error);
+  });
+
   Tutor.findOne({tutor_id:req.body.tutor_id})
   .then((tutor) => { tutor.subjects = tutor.subjects.map(subject => subject.replace(/[\[\]"]+/g, ''));
                      tutor.languages = tutor.languages.map(language => language.replace(/[\[\]"]+/g, ''));
         sessions.find({tutor_id : req.body.tutor_id})
-        .then((s) => { const data = {
+        .then((s) => { 
+        const data = {
         tutor: tutor,
-        session: s
+        session: s,
+        earning: totalAmountEarned
       }; 
       res.json(data);
     })
@@ -351,4 +366,17 @@ app.post('/payment', async (req,res) => {
   const order = await instance.orders.create(options);
   console.log(order);
   res.json(order)
+})
+
+app.post('/pay',async (req,res) => {
+  Payment.create({tutor_id:req.query.tutor_id,student_id:req.query.stu_id,date:new Date(),
+    amount:req.query.amount,session_id:req.query.session_id});
+  res.redirect(`http://localhost:3000/viewsession?tutor=${req.query.tutor_id}&student=${req.query.stu_id}`);
+})
+
+app.post('/gettutorandstudent', async (req,res) => {
+  const tutor = await Tutor.findOne({tutor_id:req.body.tutor_id});
+  const student = await Student.findOne({student_id:req.body.student_id});
+  const data = {tutor:tutor,student:student};
+  res.json(data);
 })

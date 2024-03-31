@@ -19,16 +19,11 @@
 }
 
 .fullname {
-    margin-left: 180px;
-    width: 300px;
-    height: 100px;
+    margin-left: 200px;
+    /* width: 300px;
+    height: 100px; */
     margin-top: -160px;
-    text-align: right;
-}
-
-.fullname h2 {
-    font-size: 1000px;
-    height: 100px;
+    text-align: left;
 }
 
 .fullname1 {
@@ -85,14 +80,18 @@
     margin-top: 30px;
 }
 
+.tutorinfo {
+   
+}
+
 .personal-info {
-    margin-bottom: 10px;
-    margin-top: 70px;
+    margin-bottom: 20px;
+    margin-top: 90px;
 }
 
 .professional-info {
     margin-bottom: 20px;
-    margin-top: -226px;
+    margin-top: -260px;
     margin-left: 600px;
 }
 
@@ -121,6 +120,7 @@
     padding-left: 20px;
     background: linear-gradient(to right, rgb(7, 124, 221), rgb(70, 137, 219));
     color: #fcfcfc;
+    margin-top: -25px;
 }
 
 .personal-info p,
@@ -215,7 +215,7 @@ button {
     border: 1px solid black;
     border-radius: 20px;
     cursor: pointer;
-    margin-left: 1px;
+    margin-left: 10px;
 }
 
 button:hover {

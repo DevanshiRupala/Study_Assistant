@@ -9,10 +9,41 @@ const Session = () => {
   const modalRef = useRef(null);
   const location = useLocation();
   const [sessions, setSessions] = useState();
-  const {tutor} = location.state;
-  const {student} = location.state;
+  const [tutor, setTutor] = useState(null);
+  const [student, setStudent] = useState(null);
   const navigate = useNavigate();
 
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      if (location.state) {
+        setTutor(location.state.tutor);
+        console.log(tutor)
+        setStudent(location.state.student);
+      } else {
+        const tutorId = new URLSearchParams(location.search).get('tutor');
+        const studentId = new URLSearchParams(location.search).get('student');
+        try {
+          const response = await axios.post("http://localhost:8000/gettutorandstudent", { tutor_id: tutorId, student_id: studentId });
+          setTutor(response.data.tutor);
+          setStudent(response.data.student);
+        } catch (error) {
+          console.error('Error fetching tutor and student:', error);
+        }
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    if (tutor && student) {
+      const id = tutor.tutor_id;
+      axios.post("http://localhost:8000/fetchsessionbytutor", { id })
+        .then((res) => setSessions(res.data))
+        .catch((err) => console.log(err));
+    }
+  }, [tutor, student]);
 
   const handleViewMore = () => {
     setModalOpen(true);
@@ -22,15 +53,7 @@ const Session = () => {
     setModalOpen(false);
   };
 
-  useEffect(() => {
-    const id = tutor.tutor_id;
-    console.log(id)
-    axios.post("http://localhost:8000/fetchsessionbytutor",{id})
-    .then((res) => {console.log(res.data);setSessions(res.data)})
-    .catch((err) => {console.log(err)});
-  }, []);
-
-  const onpay = async () => {
+  const onpay = async (id) => {
     const amount = tutor.hourlyRates;
     console.log(amount);
     const res = await axios.post("http://localhost:8000/payment",{amount});
@@ -44,7 +67,7 @@ const Session = () => {
       description: "Test Transaction",
       image: "../../images/logo (2).png",
       order_id: order.id, 
-      callback_url: "https://localhost:3000/",
+      callback_url: `http://localhost:8000/pay?tutor_id=${tutor.tutor_id}&stu_id=${student.student_id}&session_id=${id}&amount=${amount}`,
       prefill: { 
         "name": student.fullName, 
         "email": student.email,   
@@ -124,7 +147,7 @@ const Session = () => {
                 <span>{session.online_meeting_link}</span><br/>
               </div>}
               <div className="s-input-group">
-                <button className='s-Session_button' onClick={onpay} style={{marginTop:"10px"}}>Book Session</button>
+                <button className='s-Session_button' onClick={() => onpay(session._id)} style={{marginTop:"10px"}}>Book Session</button>
               </div>
             </div>
           </div>

@@ -15,6 +15,7 @@ function TutorDashboard() {
     const modalRef = useRef(null);
     const [tutor, settutor] = useState();
     const [session, setSession] = useState(); 
+    let earning = 0;
     
     useEffect(() => {
         const fetchData = async () => {
@@ -24,6 +25,7 @@ function TutorDashboard() {
                 const response = await axios.post("http://localhost:8000/fetchsession", { tutor_id });
                 settutor(response.data.tutor)
                 console.log(tutor)
+                earning = response.data.earning
                 setSessions(response.data.session)
             } catch (error) {
                 console.error(error);
@@ -86,7 +88,7 @@ function TutorDashboard() {
                     </div>
                     <div className="box">
                         <FaRupeeSign className='icon' style={{ fontSize: 30, color: 'white' }} />
-                        <label className='lab'>29</label>
+                        <label className='lab'>{earning}</label>
                         <h2>Earnings</h2>
                     </div>
                     <div className="box">
@@ -101,7 +103,7 @@ function TutorDashboard() {
                     </div>
                 </div>
                 <div className="big-box1">
-                    <label className='upcoming'><b>Upcoming Session :</b> </label><br /><br />
+                    <label className='upcoming'><b>Upcoming Sessions :</b> </label><br /><br />
                     <table className='border'>
                         <tr>
                             <td className='left'><b>Upcoming Session</b></td>
