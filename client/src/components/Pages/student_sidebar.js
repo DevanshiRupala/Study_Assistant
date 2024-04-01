@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import {FaBars,FaUserAlt,FaHome,FaPersonBooth} from "react-icons/fa";
+import {FaBars,FaUserAlt,FaHome,FaPersonBooth,FaClock } from "react-icons/fa";
 import { NavLink } from 'react-router-dom';
 import "../CSS/student_sidebar.css";
 
@@ -23,6 +23,11 @@ const Stuprofile = ({ student, children }) => {
             icon: <FaHome />
         },
         {
+            path: `/studentsession?state=${student.student_id}`,
+            name: "Booked Sessions",
+            icon: <FaClock />
+        },
+        {
             path: "/",
             name: "Logout",
             icon: <FaPersonBooth />
@@ -34,7 +39,6 @@ const Stuprofile = ({ student, children }) => {
         <div className="d-container">
             <div style={{ width: isOpen ? "200px" : "50px" }} className="d-sidebar">
                 <div className="d-top_section">
-
 
                     <div style={{ marginLeft: isOpen ? "8px" : "8px" }} className="d-bars">
                         <FaBars onClick={toggle} />

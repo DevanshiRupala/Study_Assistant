@@ -150,33 +150,32 @@
   }
   
   .viewmore{
-    background-color: #ccc;
+    background-color: rgb(231, 230, 159);
     border-radius: 5px;
     width: 105px;
     height: 45px;
+    color: #000;
   }
   
+  .viewmore:hover{
+     color:#000;
+  }
 
-/* Existing styles */
-
-/* Existing styles */
-
-/* Modal Styles */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black overlay */
-  z-index: 998; /* Ensure the overlay is behind the modal */
+  background-color: rgba(0, 0, 0, 0.8); 
+  z-index: 998; 
 }
 
 .modal {
   width: 600px;
-  height: auto; /* Adjusted to auto so it can expand based on content */
-  max-height: 80%; /* Limiting max height to 80% of viewport height */
-  overflow-y: auto; /* Enable vertical scrolling if content overflows */
+  height: auto; 
+  max-height: 80%; 
+  overflow-y: auto;
   position: fixed;
   top: 50%;
   left: 50%;

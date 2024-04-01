@@ -17,7 +17,7 @@ const indexUser = (user) => {
     gender: user.gender,
     subject: user.subjects,
     email: user.email,
-    gradelevels: user.gradelevels
+    gradeLevels: user.gradeLevels
   };
 
   solrClient.add(solrDocument, (err, obj) => {
@@ -55,8 +55,44 @@ const searchUser = async (s,l,g,state) => {
       rows: 32, 
     },
   });
-  return solrResponse.data.response.docs
-  ;
+  return solrResponse.data.response.docs;
 }
 
-module.exports = { indexUser, searchUser };
+const updateUser = async (user) => {
+  const solrDocument = {
+    _id: user._id.toString(), 
+    fullName: user.fullName,
+    isStudent: user.isStudent, 
+    city: user.city,
+    state: user.state,
+    gender: user.gender,
+    subject: user.subjects,
+    email: user.email,
+    gradeLevels: user.gradeLevels
+  };
+
+  solrClient.update(solrDocument, (err, obj) => {
+    if (err) {
+      console.error('Error updating user:', err);
+    } else {
+      console.log('User updated successfully:', obj);
+    }
+
+    const coreName = "SDP";
+    const solrUrl = `http://localhost:8983/solr/admin/cores?action=RELOAD&core=${coreName}`;
+
+    fetch(solrUrl)
+      .then(response => {
+        if (response.ok) {
+          console.log(`Core ${coreName} reloaded successfully.`);
+        } else {
+          console.error(`Failed to reload core ${coreName}. Status code: ${response.status}`);
+        }
+      })
+      .catch(error => {
+        console.error(`Error reloading core ${coreName}:`, error);
+      });
+  });
+};
+
+module.exports = { indexUser, searchUser, updateUser };

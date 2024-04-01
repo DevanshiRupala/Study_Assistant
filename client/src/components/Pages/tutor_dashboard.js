@@ -5,17 +5,19 @@ import '../CSS/tutordashboard.css';
 import Sidebar from './tutor_sidebar';
 import { FaRupeeSign } from 'react-icons/fa';
 import GroupIcon from '@mui/icons-material/Group';
-import StarIcon from '@mui/icons-material/Star';
 import ScheduleIcon from '@mui/icons-material/Schedule';
 
 function TutorDashboard() {
     const location = useLocation();
-    const [sessions, setSessions] = useState(null);
+    const [sessions, setSessions] = useState([]);
     const [modalOpen, setModalOpen] = useState(false);
     const modalRef = useRef(null);
     const [tutor, settutor] = useState();
     const [session, setSession] = useState(); 
-    let earning = 0;
+    const [earning,setEarning] = useState(1000);
+    const [students, setStudents] = useState(0);
+    const [totalst, settotalStudent] = useState(0);
+    const [totals, settotals] = useState(0);
     
     useEffect(() => {
         const fetchData = async () => {
@@ -23,10 +25,13 @@ function TutorDashboard() {
                 const tutor_id = new URLSearchParams(location.search).get("state");
                 console.log(tutor_id)
                 const response = await axios.post("http://localhost:8000/fetchsession", { tutor_id });
+                console.log(response.data.tutor,response.data.earning,response.data.students,response.data.session)
                 settutor(response.data.tutor)
-                console.log(tutor)
-                earning = response.data.earning
+                setEarning(response.data.earning)
+                setStudents(response.data.students)
                 setSessions(response.data.session)
+                settotalStudent(response.data.totalst)
+                settotals(response.data.totals)
             } catch (error) {
                 console.error(error);
             }
@@ -83,23 +88,23 @@ function TutorDashboard() {
                 <div className="main-content">
                     <div className='box'>
                         <ScheduleIcon className='icon' style={{ fontSize: 30, color: 'white' }} />
-                        <label className='lab'>29</label>
-                        <h2>Current Session</h2>
+                        <label className='lab'>{totals}</label>
+                        <h2>Total Session</h2>
                     </div>
                     <div className="box">
                         <FaRupeeSign className='icon' style={{ fontSize: 30, color: 'white' }} />
-                        <label className='lab'>{earning}</label>
-                        <h2>Earnings</h2>
+                        <label className='lab'>1000</label>
+                        <h2>Total Earnings</h2>
                     </div>
                     <div className="box">
                         <GroupIcon className='icon' style={{ fontSize: 30, color: 'white' }} />
-                        <label className='lab'>29</label>
-                        <h2>Total Students</h2>
+                        <label className='lab'>{students}</label>
+                        <h2>Students in next session</h2>
                     </div>
                     <div className="box">
-                        <StarIcon className='icon' style={{ fontSize: 30, color: 'white' }} />
-                        <label className='lab'>29</label>
-                        <h2>Reviews</h2>
+                        <GroupIcon className='icon' style={{ fontSize: 30, color: 'white' }} />
+                        <label className='lab'>{totalst}</label>
+                        <h2>Total Student</h2>
                     </div>
                 </div>
                 <div className="big-box1">

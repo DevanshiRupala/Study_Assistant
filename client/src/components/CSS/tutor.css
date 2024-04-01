@@ -80,10 +80,6 @@
     margin-top: 30px;
 }
 
-.tutorinfo {
-   
-}
-
 .personal-info {
     margin-bottom: 20px;
     margin-top: 90px;
@@ -120,7 +116,7 @@
     padding-left: 20px;
     background: linear-gradient(to right, rgb(7, 124, 221), rgb(70, 137, 219));
     color: #fcfcfc;
-    margin-top: -25px;
+    margin-top: 5px;
 }
 
 .personal-info p,
@@ -141,7 +137,7 @@
 
 .professional-info1 {
     margin-bottom: 20px;
-    margin-top: -335px;
+    margin-top: -395px;
     margin-left: 600px;
 }
 
@@ -166,7 +162,7 @@
 }
 
 .other-details1 {
-    margin-top: -150px;
+    margin-top: -115px;
     width: 550px;
 }
 

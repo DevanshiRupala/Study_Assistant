@@ -11,7 +11,7 @@ const path = require('path');
 const Grid = require('gridfs-stream');
 const { GridFsStorage } = require('multer-gridfs-storage');
 const multer = require('multer');
-const { indexUser, searchUser } = require('./solrUtils');
+const { indexUser, searchUser, updateUser } = require('./solrUtils');
 const session = require('express-session');
 const passport = require('passport');
 const bcrypt = require('bcrypt');
@@ -264,21 +264,6 @@ app.post("/addsession", async (req,res) => {
   res.json("saved");
 });
 
-app.get('/fetch', (req, res) => {
-  console.log(req)
-  if (!gfs) {
-    return res.status(500).json({ error: 'GridFS not initialized' });
-  }
-  gfs.files.find().toArray((err, files) => {
-    if (err) {
-      console.error('Error fetching files:', err);
-      return res.status(500).json({ error: err.message });
-    }
-    console.log(files);
-    return res.json(files);
-  });
-});
-
 app.post('/getstudent', (req,res) => {
   Student.findOne({student_id:req.body.student_id})
   .then((s) => {res.status(200).json(s)})
@@ -286,9 +271,11 @@ app.post('/getstudent', (req,res) => {
 })
 
 app.post('/updatestudent', async(req,res) => {
+  console.log(req.body.photo)
   const _id = req.body.student._id;
   console.log(_id)
   const student = req.body.student;
+  student.profile_picture = req.body.photo;
   console.log(student)
   const r = await Student.findByIdAndUpdate(_id, student,{new:true})
   if (!r) {
@@ -297,11 +284,15 @@ app.post('/updatestudent', async(req,res) => {
   res.json(r)
 })
 
-app.post('/fetchsession',(req,res) => {
+app.post('/fetchsession',async (req,res) => {
   let totalAmountEarned = 0;
+  let student = 0;
+  let totalstudents = 0;
+  let totalsessions = 0;
+
   Payment.aggregate([
-    { $match: { tutor_id: req.body.tutor_id } }, 
-    { $group: { _id: null, totalAmount: { $sum: '$amount' } } }, 
+    { $match: { tutor_id: (req.body.tutor_id) } }, 
+    { $group: { _id: null, totalAmount: { $avg: '$amount' } } }
   ])
   .then((result) => {
     totalAmountEarned = result.length > 0 ? result[0].totalAmount : 0;
@@ -311,21 +302,28 @@ app.post('/fetchsession',(req,res) => {
     console.error("Error while calculating total amount earned by tutor:", error);
   });
 
-  Tutor.findOne({tutor_id:req.body.tutor_id})
-  .then((tutor) => { tutor.subjects = tutor.subjects.map(subject => subject.replace(/[\[\]"]+/g, ''));
-                     tutor.languages = tutor.languages.map(language => language.replace(/[\[\]"]+/g, ''));
-        sessions.find({tutor_id : req.body.tutor_id})
-        .then((s) => { 
-        const data = {
-        tutor: tutor,
-        session: s,
-        earning: totalAmountEarned
-      }; 
-      res.json(data);
-    })
-    .catch((e) => { res.status(400).json("error")})
+  sessions.findOne({tutor_id:req.body.tutor_id})
+  .then((s) => {
+    Payment.find({session_id:s._id})
+    .then((p) => {student = p.length; console.log(p.length)})
+    .catch((e) => res.status(500))
   })
-  .catch((err) => {res.status(500)})
+  .catch((err) => res.status(500));
+
+  Payment.find({tutor_id:req.body.tutor_id})
+  .then((s) => totalstudents = s.length)
+  .catch((err) => res.status(500))
+  
+  sessions.find({tutor_id:req.body.tutor_id})
+  .then((s) => totalsessions = s.length)
+  .catch((err) => res.status(500));
+
+  const t = await Tutor.findOne({tutor_id:req.body.tutor_id});
+  console.log(t)
+  const s = await sessions.find({tutor_id:t.tutor_id});
+  console.log(s)
+  const data = {tutor:t,session:s,students:student,earning:totalAmountEarned,totals:totalsessions,totalst:totalstudents};
+  res.json(data);
 })
 
 app.post('/deletesession',(req,res) => {
@@ -352,11 +350,6 @@ app.post('/fetchsessionbytutor', async (req,res) => {
   res.json(s)
 });
 
-app.post('/uploadfile', (req,res) => {
-  const {tutor_id} = req.query;
-  console.log(tutor_id)
-})
-
 app.post('/payment', async (req,res) => {
   const {amount} = req.body;
   const options = {
@@ -378,5 +371,32 @@ app.post('/gettutorandstudent', async (req,res) => {
   const tutor = await Tutor.findOne({tutor_id:req.body.tutor_id});
   const student = await Student.findOne({student_id:req.body.student_id});
   const data = {tutor:tutor,student:student};
+  res.json(data);
+})
+
+app.post('/bookedstudent', async (req,res) => {
+  const s = await sessions.findOne({tutor_id:req.body.tutor_id});
+  const payments = await Payment.find({session_id:s._id});
+  const studentIds = payments.map(payment => payment.student_id); 
+  const students = await Student.find({ student_id: { $in: studentIds } });
+  res.json(students);
+})
+
+app.post('/updatetutor',async (req,res) => {
+  const tutor = req.body.tutor;
+  console.log(tutor)
+  const _id = tutor._id;
+  const t = await Tutor.findByIdAndUpdate(_id,tutor,{new:true});
+  updateUser(t)
+  res.json(t)
+});
+
+app.post('/getsessionbystudent', async(req,res) => {
+  const session = await Payment.find({student_id:req.body.student_id});
+  const t_ids = session.map(session => session.tutor_id);
+  const t = await Tutor.find({tutor_id:{$in: t_ids}}); 
+  const s_ids = session.map(session => session.session_id);
+  const s = await sessions.find({_id : {$in: s_ids}});
+  const data = {tutor:t,session:s}
   res.json(data);
 })

@@ -86,9 +86,10 @@ const Session = () => {
   return (
     <div className='background_gradient'>
     <div>
-      <h1 style={{marginLeft:"650px"}}>Session List</h1>
+      <h1 style={{marginLeft:"665px"}}>Session List</h1>
+      <div className='display-flex'>
       {sessions && sessions.map((session) => (
-      <div className="s-info-box" style={{marginLeft:"30px"}} key={session._id}>
+      <div className="s-info-box" style={{marginLeft:"30px", marginRight:"20px"}} key={session._id}>
       <div className="s-info-field">
         <label htmlFor="session">Subject:</label>
         <span id="session">&nbsp;{session.subject}</span>
@@ -155,7 +156,8 @@ const Session = () => {
       )}
     </div>))}
     </div>
-    <Link to='/tutorsearched' state={{tutor,student}} ><button style={{marginLeft:"40px"}} className='back_button'>Back</button></Link>
+    </div>
+    <Link to='/tutorsearched' state={{tutor,student}} ><button style={{marginLeft:"140px",marginTop:"20px"}} className='back_button'>Back</button></Link>
     </div>
   );
 }

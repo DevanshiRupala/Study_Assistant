@@ -18,7 +18,7 @@ const StudentDetails = () => {
 
     const handleSave = async () => {
         console.log(student)
-        const response = await axios.post("http://localhost:8000/updatestudent", { student });
+        const response = await axios.post("http://localhost:8000/updatestudent", {photo, student });
         setIsEditing(false);
     };
 

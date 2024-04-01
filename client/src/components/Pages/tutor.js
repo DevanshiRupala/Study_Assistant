@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import '../CSS/tutor.css';
 import Sidebar from './tutor_sidebar';
+import axios from 'axios';
 
 const TutorProfile = () => {
     const [isEditing, setIsEditing] = useState(false);
@@ -14,15 +15,10 @@ const TutorProfile = () => {
         setIsEditing(true);
     };
 
-    const handleSave = (e) => {
+    const handleSave = async (e) => {
         e.preventDefault();
-        const lastSubjectValue = document.getElementById('lastSubjectField').value;
-        if(lastSubjectValue){
-        setTutor(prevTutorData => ({
-            ...prevTutorData,
-            subjects: [...prevTutorData.subjects, lastSubjectValue]
-        }));}
         console.log(tutor)
+        const res = await axios.post('http://localhost:8000/updatetutor',{tutor});
         setIsEditing(false);
     };
 
@@ -153,11 +149,15 @@ const TutorProfile = () => {
                                 <h3>Personal Information</h3>
                                 <div className="input-row">
                                     <label htmlFor="city">City:</label>
-                                    <input type="text" value={tutor.city} onChange={(e) => handleInputChange('city', e.target.value)} placeholder="City" />
+                                    <input type="text" value={tutor.gender} onChange={(e) => handleInputChange('gender', e.target.value)} placeholder="Gender" />
                                 </div>
                                 <div className="input-row">
                                     <label htmlFor="zipcode">ZipCode:</label>
                                     <input type="text" value={tutor.zipCode} onChange={(e) => handleInputChange('zipCode', e.target.value)} placeholder="Zipcode" />
+                                </div>
+                                <div className="input-row">
+                                    <label htmlFor="city">City:</label>
+                                    <input type="text" value={tutor.city} onChange={(e) => handleInputChange('city', e.target.value)} placeholder="City" />
                                 </div>
                                 <div className="input-row">
                                     <label htmlFor="state">State:</label>
@@ -192,7 +192,7 @@ const TutorProfile = () => {
                                                         </div>
                                                     ))}
                                                     <div className="language-row">
-                                                        <input type="text"  id="lastSubjectField" placeholder="New subject" />
+                                                        <input type="text"  id="lastSubjectField" onChange={handleNewSubjectChange} placeholder="New subject" />
                                                         <button onClick={handleAddNewSubject}>+</button>
                                                     </div>
                                                 </div>
@@ -209,6 +209,10 @@ const TutorProfile = () => {
                                      </div>
                                      <div className="other-details1">
                                          <h3>Other Details</h3>
+                                         <div className="input-row">
+                                            <label htmlFor="hourlyrate">Teaching Mode:</label>
+                                            <input type="text" value={tutor.mode} onChange={(e) => handleInputChange('mode', e.target.value)} placeholder="Hourly Rate" />
+                                         </div>
                                          <div className="input-row">
                                             <label htmlFor="hourlyrate">HourlyRate:</label>
                                             <input type="text" value={tutor.hourlyRates} onChange={(e) => handleInputChange('hourlyRates', e.target.value)} placeholder="Hourly Rate" />
@@ -228,7 +232,7 @@ const TutorProfile = () => {
                                                         </div>
                                                     ))}
                                                     <div className="language-row">
-                                                        <input type="text" value={newLanguage} onChange={handleNewLanguageChange} placeholder="New Language" />
+                                                        <input type="text" value={newLanguage} id="lastLanguageField" onChange={handleNewLanguageChange} placeholder="New Language" />
                                                         <button onClick={handleAddNewLanguage}>+</button>
                                                     </div>
                                                 </div>

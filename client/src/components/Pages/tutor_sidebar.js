@@ -6,7 +6,7 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import PersonIcon from '@mui/icons-material/Person';
 import ScheduleIcon from '@mui/icons-material/Schedule';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import BookIcon from '@mui/icons-material/Book';
+import GroupIcon from '@mui/icons-material/Group';
 
 function Sidebar ({tutor}) {
     console.log(tutor);
@@ -17,7 +17,7 @@ function Sidebar ({tutor}) {
                             {tutor && <li><DashboardIcon className='s_dashboard' /><Link to={`/tutor_dashboard?state=${tutor.tutor_id}`}>Dashboard</Link></li> }<br></br> 
                             <li><PersonIcon className='s_person' /><Link to='/tutor' state= {tutor}>Profile</Link></li>
                             <li><ScheduleIcon className='s_session'/><Link to="/session" state={tutor}>Add Session</Link></li>
-                            <li><BookIcon className='s_chart'/><Link to="/add_material" state={tutor}>Materials</Link></li>
+                            <li><GroupIcon className='s_chart'/><Link to="/bookedstudent" state={tutor}>Students</Link></li>
                             <li><ExitToAppIcon className='s_logout'/><Link to="/">Logout</Link></li>
                         </ul>
                     </div>

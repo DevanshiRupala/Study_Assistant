@@ -99,3 +99,9 @@
 .back_button:hover {
   color: #000;
 }
+
+.display-flex {
+  display: flex;
+  margin-left: 100px;
+  margin-top: 35px;
+}

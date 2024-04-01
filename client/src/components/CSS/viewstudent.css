@@ -1,0 +1,112 @@
+/* General styling */
+.viewstudent-profile{
+    border-radius: 10px;
+}
+
+ .profile_img {
+    width: 200px; /* Adjusted width for profile image */
+    height: 200px; /* Adjusted height for profile image */
+    object-fit: cover;
+    margin: 10px auto;
+    border: 10px solid #ccc;
+    border-radius: 50%;
+    margin-left: 35px;
+    margin-top: 20px;
+}
+
+.card-header h3 {
+    font-size: 24px; /* Increased font size */
+    font-weight: 700;
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+.card p {
+    font-size: 18px; /* Increased font size */
+    color: #000;
+}
+
+ .s-table th {
+    font-size: 18px; /* Increased font size */
+    padding: 20px; /* Increased padding */
+    color: #000;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 200px; /* Adjusted width for better alignment */
+}
+.s-table td {
+    font-size: 18px; /* Increased font size */
+    padding: 20px; /* Increased padding */
+    color: #000;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 450px; /* Adjusted width for better alignment */
+}
+
+/* Gradient background */
+.background-container {
+    height: 729px;
+    background: #67B26F;  
+    background: linear-gradient(to right , #82c9ed,#eff4ae,#f8fcbf,#97dbef,#b2e5ff,#f8fcbf);
+}
+
+/* Additional styling */
+ .viewcontainer {
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-left: 300px;
+    width: 1200px;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: 10px; /* Adjusted margin for the row */
+}
+
+.viewstudent1{
+    margin-top: 100px;
+    position: relative;
+    width: 290px;
+    min-height: 1px;
+    margin-left: 0px;
+    background-color: #fff;
+   
+   
+}
+.viewstudent2{
+    margin-top: 100px;
+    position: relative;
+    width: 500px;
+    min-height: 1px;
+    margin-left: 50px;
+    background-color: #fff;
+   
+}
+
+/* Additional styling for cards */
+/* .card {
+    background-color: #fff;
+    border: none;
+    /* box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); 
+} */
+
+.card-header {
+    background-color: transparent;
+    border-bottom: none;
+}
+
+.card-header h3 {
+    margin-bottom: 0;
+}
+
+.card-body {
+    padding: 20px;
+}
